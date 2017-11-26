@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-class AdministradorController extends \yii\rest\ActiveController
+class AdministradorController extends AuthController
 {
   public $modelClass = 'app\models\Administrador';
 
@@ -11,8 +11,17 @@ class AdministradorController extends \yii\rest\ActiveController
       $actions = parent::actions();
   
       // disable the "delete" and "create" actions
-      unset($actions['delete']);
+      unset($actions['delete'], $actions['index']);
   
       return $actions;
+  }
+  public function checkAccess($action, $model = null, $params = [])
+  {
+      // check if the user can access $action and $model
+      // throw ForbiddenHttpException if access should be denied
+      if ($action === 'view') {
+          if ($model->id !== \Yii::$app->user->id)
+              throw new \yii\web\ForbiddenHttpException(sprintf('Pode ver somente seu usuario', $action));
+      }
   }
 }

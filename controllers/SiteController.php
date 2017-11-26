@@ -12,6 +12,11 @@ class SiteController extends ActiveController
 {
     public $modelClass = 'app\models\LoginForm';
     
+
+    public function actionError(){
+        $response = Yii::$app->getResponse();
+        $response->setStatusCode(404);
+    }
     /**
      * Login action.
      *
@@ -29,8 +34,7 @@ class SiteController extends ActiveController
 
             $key = "secretT@23!34%55";
             $token = array(
-                "username" => $model->username,
-                "password" => $model->password,
+                "user_id" => Yii::$app->user->identity->id,
             );
             $jwt = JWT::encode($token, $key);
             return ['token' => $jwt];

@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-class TagController extends \yii\rest\ActiveController
+class TagController extends AuthController
 {
   public $modelClass = 'app\models\Tag';
 }

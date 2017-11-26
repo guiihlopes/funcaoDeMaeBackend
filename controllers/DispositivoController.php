@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-class DispositivoController extends \yii\rest\ActiveController
+class DispositivoController extends AuthController
 {
   public $modelClass = 'app\models\Dispositivo';
 
