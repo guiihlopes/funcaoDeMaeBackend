@@ -36,7 +36,7 @@ class TagController extends Controller
     public function actionIndex()
     {
         $searchModel = new TagSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(['TagSearch' => ['idAdm' => Yii::$app->user->identity->idAdmin]]);
 
         return $this->render('index', [
             'searchModel' => $searchModel,

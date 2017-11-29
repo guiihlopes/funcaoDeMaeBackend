@@ -1,10 +1,24 @@
 <?php
 
 /* @var $this yii\web\View */
+use yii\grid\GridView;
 
 $this->title = 'Dashboard';
 ?>
         <div class="container">
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'columns' => [
+                    ['class' => 'yii\grid\SerialColumn'],
+
+                    'tempoUso',
+                    'dtUso',
+                    'consumoMedio',
+                    'idTag',
+
+                    ['class' => 'yii\grid\ActionColumn'],
+                ],
+            ]); ?>
             <div class="row">
                 <div class="col-lg-3 col-md-6">
                     <div class="card-box">
