@@ -5,18 +5,17 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "Dispositivo".
+ * This is the model class for table "dispositivo".
  *
- * @property integer $id
- * @property string $apelido_dispositivo
- * @property string $creation_date
- * @property integer $limite_energia
- * @property integer $nivel_bat_dispositivo
- * @property string $serial
- * @property string $status_dispositivo
- * @property string $id_administrador
+ * @property string $idDispositivo
+ * @property string $apelidoDispositivo
+ * @property integer $nivelBattDispositivo
+ * @property integer $limiteEnergia
+ * @property integer $idAdm
  *
- * @property Administrador $idAdministrador
+ * @property Administrador $idAdm0
+ * @property TagDispositivo[] $tagDispositivos
+ * @property Uso[] $usos
  */
 class Dispositivo extends \yii\db\ActiveRecord
 {
@@ -25,7 +24,7 @@ class Dispositivo extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'Dispositivo';
+        return 'dispositivo';
     }
 
     /**
@@ -34,11 +33,10 @@ class Dispositivo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['apelido_dispositivo', 'serial', 'status_dispositivo'], 'string'],
-            [['creation_date'], 'safe'],
-            [['limite_energia', 'nivel_bat_dispositivo'], 'integer'],
-            [['id_administrador'], 'number'],
-            [['id_administrador'], 'exist', 'skipOnError' => true, 'targetClass' => Administrador::className(), 'targetAttribute' => ['id_administrador' => 'id']],
+            [['idDispositivo', 'apelidoDispositivo'], 'required'],
+            [['idDispositivo', 'apelidoDispositivo'], 'string'],
+            [['nivelBattDispositivo', 'limiteEnergia', 'idAdm'], 'integer'],
+            [['idAdm'], 'exist', 'skipOnError' => true, 'targetClass' => Administrador::className(), 'targetAttribute' => ['idAdm' => 'idAdmin']],
         ];
     }
 
@@ -48,22 +46,35 @@ class Dispositivo extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'apelido_dispositivo' => 'Apelido Dispositivo',
-            'creation_date' => 'Creation Date',
-            'limite_energia' => 'Limite Energia',
-            'nivel_bat_dispositivo' => 'Nivel Bat Dispositivo',
-            'serial' => 'Serial',
-            'status_dispositivo' => 'Status Dispositivo',
-            'id_administrador' => 'Id Administrador',
+            'idDispositivo' => 'Id Dispositivo',
+            'apelidoDispositivo' => 'Dispositivo',
+            'nivelBattDispositivo' => 'Nivel de bateria do dispositivo',
+            'limiteEnergia' => 'Limite de energia',
+            'idAdm' => 'Id Adm',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdAdministrador()
+    public function getAdministrador()
     {
-        return $this->hasOne(Administrador::className(), ['id' => 'id_administrador']);
+        return $this->hasOne(Administrador::className(), ['idAdmin' => 'idAdm']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTagDispositivos()
+    {
+        return $this->hasMany(TagDispositivo::className(), ['idDispositivo' => 'idDispositivo']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsos()
+    {
+        return $this->hasMany(Uso::className(), ['idDispositivo' => 'idDispositivo']);
     }
 }

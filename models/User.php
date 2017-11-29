@@ -22,9 +22,8 @@ class User extends Administrador implements \yii\web\IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        $key = "secretT@23!34%55";
-        $jwt = JWT::decode($token, $key, array('HS256'));
-        return self::findIdentity($jwt->user_id);
+
+        return static::findOne(['accessToken' => $token]);
     }
 
     /**
@@ -43,7 +42,7 @@ class User extends Administrador implements \yii\web\IdentityInterface
      */
     public function getId()
     {
-        return $this->id;
+        return $this->idAdmin;
     }
 
     /**

@@ -5,24 +5,25 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "Administrador".
+ * This is the model class for table "administrador".
  *
- * @property string $id
- * @property string $bairro
- * @property string $cep
- * @property string $cidade
- * @property string $complemento
- * @property string $cpf
- * @property string $dt_nasc
+ * @property integer $idAdmin
  * @property string $email
- * @property string $estado
- * @property string $logradouro
- * @property string $nome
- * @property string $numero
  * @property string $senha
+ * @property string $nome
+ * @property string $cpf
+ * @property string $dtNasc
+ * @property string $cep
+ * @property string $logradouro
+ * @property string $numero
+ * @property string $complemento
+ * @property string $bairro
+ * @property string $cidade
+ * @property string $estado
  * @property string $telefone
  *
  * @property Dispositivo[] $dispositivos
+ * @property Tag[] $tags
  */
 class Administrador extends \yii\db\ActiveRecord
 {
@@ -31,7 +32,7 @@ class Administrador extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'Administrador';
+        return 'administrador';
     }
 
     /**
@@ -40,7 +41,8 @@ class Administrador extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['bairro', 'cep', 'cidade', 'complemento', 'cpf', 'dt_nasc', 'email', 'estado', 'logradouro', 'nome', 'numero', 'senha', 'telefone'], 'string'],
+            [['email', 'senha', 'nome', 'cpf', 'dtNasc', 'cep', 'logradouro', 'numero', 'bairro', 'cidade', 'estado', 'telefone'], 'required'],
+            [['email', 'senha', 'nome', 'cpf', 'dtNasc', 'cep', 'logradouro', 'numero', 'complemento', 'bairro', 'cidade', 'estado', 'telefone'], 'string'],
         ];
     }
 
@@ -50,19 +52,19 @@ class Administrador extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'bairro' => 'Bairro',
-            'cep' => 'Cep',
-            'cidade' => 'Cidade',
-            'complemento' => 'Complemento',
-            'cpf' => 'Cpf',
-            'dt_nasc' => 'Dt Nasc',
+            'idAdmin' => 'Id Admin',
             'email' => 'Email',
-            'estado' => 'Estado',
-            'logradouro' => 'Logradouro',
-            'nome' => 'Nome',
-            'numero' => 'Numero',
             'senha' => 'Senha',
+            'nome' => 'Nome',
+            'cpf' => 'Cpf',
+            'dtNasc' => 'Dt Nasc',
+            'cep' => 'Cep',
+            'logradouro' => 'Logradouro',
+            'numero' => 'Numero',
+            'complemento' => 'Complemento',
+            'bairro' => 'Bairro',
+            'cidade' => 'Cidade',
+            'estado' => 'Estado',
             'telefone' => 'Telefone',
         ];
     }
@@ -72,6 +74,14 @@ class Administrador extends \yii\db\ActiveRecord
      */
     public function getDispositivos()
     {
-        return $this->hasMany(Dispositivo::className(), ['id_administrador' => 'id']);
+        return $this->hasMany(Dispositivo::className(), ['idAdm' => 'idAdmin']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTags()
+    {
+        return $this->hasMany(Tag::className(), ['idAdm' => 'idAdmin']);
     }
 }

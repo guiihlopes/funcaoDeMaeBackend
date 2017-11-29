@@ -5,12 +5,17 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "Tag".
+ * This is the model class for table "tag".
  *
- * @property string $id
- * @property integer $limMaxTempoUso
+ * @property integer $idTag
  * @property string $apelidoTag
+ * @property integer $limMaxTempoUso
  * @property integer $qtdeUsoDia
+ * @property integer $idAdm
+ *
+ * @property Administrador $idAdm0
+ * @property TagDispositivo[] $tagDispositivos
+ * @property Uso[] $usos
  */
 class Tag extends \yii\db\ActiveRecord
 {
@@ -19,7 +24,7 @@ class Tag extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'Tag';
+        return 'tag';
     }
 
     /**
@@ -28,10 +33,10 @@ class Tag extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id'], 'required'],
-            [['id'], 'number'],
-            [['limMaxTempoUso', 'qtdeUsoDia'], 'integer'],
+            [['idTag', 'apelidoTag'], 'required'],
+            [['idTag', 'limMaxTempoUso', 'qtdeUsoDia', 'idAdm'], 'integer'],
             [['apelidoTag'], 'string'],
+            [['idAdm'], 'exist', 'skipOnError' => true, 'targetClass' => Administrador::className(), 'targetAttribute' => ['idAdm' => 'idAdmin']],
         ];
     }
 
@@ -41,10 +46,35 @@ class Tag extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'limMaxTempoUso' => 'Lim Max Tempo Uso',
-            'apelidoTag' => 'Apelido Tag',
-            'qtdeUsoDia' => 'Qtde Uso Dia',
+            'idTag' => 'Id Tag',
+            'apelidoTag' => 'Apelido da tag',
+            'limMaxTempoUso' => 'Limite máximo tempo de uso',
+            'qtdeUsoDia' => 'Quantidade de uso por dia',
+            'idAdm' => 'Id Adm',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAdministrador()
+    {
+        return $this->hasOne(Administrador::className(), ['idAdmin' => 'idAdm']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTagDispositivos()
+    {
+        return $this->hasMany(TagDispositivo::className(), ['idTag' => 'idTag']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsos()
+    {
+        return $this->hasMany(Uso::className(), ['idTag' => 'idTag']);
     }
 }

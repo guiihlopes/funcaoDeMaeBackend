@@ -14,28 +14,14 @@ $config = [
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'v1xCt4y3mOrgYDMgkpgLZAVR57jIlC8k',
-            'parsers' => [
-                'application/json' => 'yii\web\JsonParser',
-            ]
-        ],
-        'response' => [
-            'formatters' => [
-                \yii\web\Response::FORMAT_JSON => [
-                    'class' => 'yii\web\JsonResponseFormatter',
-                    'prettyPrint' => YII_DEBUG, // use "pretty" output in debug mode
-                    'encodeOptions' => JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE,
-                ],
-            ],
+            'cookieValidationKey' => 'FOUIEWGFHJWEP!@!$2353241@$dsada',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
             'identityClass' => 'app\models\User',
-            'loginUrl' => null,
             'enableAutoLogin' => true,
-            'enableSession' => false,
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -61,15 +47,6 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                [
-                    'class' => 'yii\rest\UrlRule', 
-                    'controller' => [
-                        'dispositivo',
-                        'tag',
-                        'administradores' => 'administrador',
-                        'uso',
-                    ]
-            ],
             ],
         ],
     ],

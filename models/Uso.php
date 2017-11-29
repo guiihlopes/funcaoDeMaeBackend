@@ -5,14 +5,17 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "Uso".
+ * This is the model class for table "uso".
  *
- * @property string $id
- * @property string $consumeMedio
+ * @property integer $idUso
+ * @property integer $tempoUso
  * @property string $dtUso
+ * @property double $consumoMedio
+ * @property integer $idTag
  * @property string $idDispositivo
- * @property string $tempoUso
- * @property string $idTag
+ *
+ * @property Tag $idTag0
+ * @property Dispositivo $idDispositivo0
  */
 class Uso extends \yii\db\ActiveRecord
 {
@@ -21,7 +24,7 @@ class Uso extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'Uso';
+        return 'uso';
     }
 
     /**
@@ -30,10 +33,13 @@ class Uso extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id'], 'required'],
-            [['id', 'consumeMedio', 'tempoUso', 'idTag'], 'number'],
+            [['tempoUso', 'dtUso', 'consumoMedio', 'idTag', 'idDispositivo'], 'required'],
+            [['tempoUso', 'idTag'], 'integer'],
             [['dtUso'], 'safe'],
+            [['consumoMedio'], 'number'],
             [['idDispositivo'], 'string'],
+            [['idTag'], 'exist', 'skipOnError' => true, 'targetClass' => Tag::className(), 'targetAttribute' => ['idTag' => 'idTag']],
+            [['idDispositivo'], 'exist', 'skipOnError' => true, 'targetClass' => Dispositivo::className(), 'targetAttribute' => ['idDispositivo' => 'idDispositivo']],
         ];
     }
 
@@ -43,21 +49,28 @@ class Uso extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'consumeMedio' => 'Consume Medio',
-            'dtUso' => 'Dt Uso',
-            'idDispositivo' => 'Id Dispositivo',
+            'idUso' => 'Id Uso',
             'tempoUso' => 'Tempo Uso',
+            'dtUso' => 'Dt Uso',
+            'consumoMedio' => 'Consumo Medio',
             'idTag' => 'Id Tag',
+            'idDispositivo' => 'Id Dispositivo',
         ];
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getTag()
     {
-        return $this->hasOne(Tag::className(), ['id' => 'idTag']);
+        return $this->hasOne(Tag::className(), ['idTag' => 'idTag']);
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getDispositivo()
     {
-        return $this->hasOne(Dispositivo::className(), ['id' => 'idDispositivo']);
+        return $this->hasOne(Dispositivo::className(), ['idDispositivo' => 'idDispositivo']);
     }
 }
