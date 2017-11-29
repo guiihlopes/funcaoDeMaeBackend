@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="text-center">
     <a href="<?= Url::toRoute('/') ?>" class="logo"><span>Função de <span>mãe</span></span><i class="zmdi zmdi-layers"></i></a>
-    <h5 class="text-muted m-t-0 font-600">Responsive Admin Dashboard</h5>
+    <h5 class="text-muted m-t-0 font-600">Controle seu gasto de energia</h5>
 </div>
 <div class="m-t-40 card-box">
     <div class="text-center">
