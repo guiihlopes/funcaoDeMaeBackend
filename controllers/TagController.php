@@ -65,7 +65,9 @@ class TagController extends Controller
     {
         $model = new Tag();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $model->idAdm = Yii::$app->user->identity->idAdmin;
+            $model->save();
             return $this->redirect(['view', 'id' => $model->idTag]);
         } else {
             return $this->render('create', [

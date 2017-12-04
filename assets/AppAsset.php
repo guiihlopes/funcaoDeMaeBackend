@@ -30,8 +30,6 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'js/modernizr.min.js',
-        "js/jquery.min.js",
-        "js/bootstrap.min.js",
         "js/detect.js",
         "js/fastclick.js",
         "js/jquery.slimscroll.js",
@@ -41,9 +39,9 @@ class AppAsset extends AssetBundle
         "js/jquery.nicescroll.js",
         "js/jquery.scrollTo.min.js",
         "js/jquery.knob.js",
-        "js/morris.min.js",
+        // "js/morris.min.js",
         "js/raphael-min.js",
-        "js/jquery.dashboard.js",
+        // "js/jquery.dashboard.js",
         "js/jquery.core.js",
         "js/jquery.app.js",
     ];

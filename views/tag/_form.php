@@ -12,6 +12,8 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <?= $form->field($model, 'idTag')->textInput() ?>
+
     <?= $form->field($model, 'apelidoTag')->textInput() ?>
 
     <?= $form->field($model, 'limMaxTempoUso')->textInput() ?>

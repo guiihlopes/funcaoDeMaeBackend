@@ -6,6 +6,8 @@ use Yii;
 use app\models\Dispositivo;
 use app\models\DispositivoSearch;
 use yii\web\Controller;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -64,13 +66,21 @@ class DispositivoController extends Controller
     {
         $model = new Dispositivo();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idDispositivo]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
         }
+
+        if ($model->load(Yii::$app->request->post())) {
+            $model->idAdm = Yii::$app->user->identity->idAdmin;
+            if($model->validate()){
+                $model->save();
+            }
+        }
+        
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**

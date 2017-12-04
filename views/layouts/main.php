@@ -35,7 +35,7 @@ AppAsset::register($this);
 
                 <!-- LOGO -->
                 <div class="topbar-left">
-                    <a href="<?= Url::toRoute('/') ?>" class="logo"><span>Função de <span>mãe</span></span><i class="zmdi zmdi-layers"></i></a>
+                    <a href="<?= Url::toRoute('/') ?>" class="logo"><span>Função de <span>Mãe</span></span><i class="zmdi zmdi-layers"></i></a>
                 </div>
 
                 <!-- Button mobile view to collapse sidebar menu -->

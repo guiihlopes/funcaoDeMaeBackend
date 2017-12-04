@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use \Firebase\JWT\JWT;
-
 class User extends Administrador implements \yii\web\IdentityInterface
 {
     public $authKey;
