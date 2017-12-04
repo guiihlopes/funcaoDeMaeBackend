@@ -31,12 +31,12 @@ $default_buttons = [
 $wizard_config = [
 	'id' => 'stepwizard',
 	'steps' => [
-		1 => [
-			'title' => 'Step 1',
-            'icon' => 'glyphicon glyphicon glyphicon-plus',
-            'skippable' => false,
-			'content' => $this->render('_step1', ['model' => $model, 'form' => $form]),
-            'buttons' => $default_buttons,
+            1 => [
+                'title' => 'Step 1',
+                'icon' => 'glyphicon glyphicon glyphicon-plus',
+                'skippable' => false,
+                'content' => $this->render('_step1', ['model' => $model, 'form' => $form]),
+                'buttons' => $default_buttons,
             ],
             2 => [
                 'title' => 'Step 2',
