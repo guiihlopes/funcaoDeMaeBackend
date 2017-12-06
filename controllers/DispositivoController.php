@@ -37,11 +37,12 @@ class DispositivoController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new DispositivoSearch();
-        $dataProvider = $searchModel->search(['DispositivoSearch' => ['idAdmin' => Yii::$app->user->identity->idAdmin]]);
+        $searchModel = new DispositivoSearch(['idAdmin' => Yii::$app->user->identity->idAdmin]);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
         ]);
     }
 

@@ -26,6 +26,12 @@ class Dispositivo extends \yii\db\ActiveRecord
         return 'dispositivo';
     }
 
+    public function scenarios(){
+        $scenarios = parent::scenarios();
+
+        return $scenarios;
+    }
+
     /**
      * @inheritdoc
      */
@@ -34,7 +40,8 @@ class Dispositivo extends \yii\db\ActiveRecord
         return [
             [['idDispositivo', 'apelidoDispositivo'], 'required'],
             [['idDispositivo', 'apelidoDispositivo'], 'string'],
-            ['idDispositivo', 'isValidDispositivo'],
+            [['idDispositivo'], 'default', 'value'=> Yii::$app->user->identity->idAdmin],
+            ['idDispositivo', 'isValidDispositivo', 'on' => 'register'],
             [['nivelBattDispositivo', 'limiteEnergia', 'idAdmin'], 'integer'],
         ];
     }
