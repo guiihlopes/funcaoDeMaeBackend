@@ -44,6 +44,8 @@ class UsoSearch extends Uso
     {
         $query = Uso::find();
 
+        $query->joinWith(['dispositivo', 'tag']);
+
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -67,7 +69,8 @@ class UsoSearch extends Uso
         ]);
 
         $query->andFilterWhere(['like', 'dtUso', $this->dtUso])
-            ->andFilterWhere(['like', 'idDispositivo', $this->idDispositivo]);
+            ->andFilterWhere(['like', 'uso.idDispositivo', $this->idDispositivo])
+            ->andFilterWhere(['like', 'dispositivo.idDispositivo', $this->idDispositivo]);
 
         return $dataProvider;
     }

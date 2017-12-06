@@ -33,7 +33,7 @@ class Tag extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idTag', 'apelidoTag', 'idAdmin'], 'required'],
+            [['idTag', 'apelidoTag'], 'required'],
             [['idTag', 'limMaxTempoUso', 'qtdeUsoDia', 'idAdmin'], 'integer'],
             [['apelidoTag'], 'string'],
         ];

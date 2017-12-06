@@ -7,8 +7,8 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
-use yii\data\ActiveDataProvider;
 use app\models\Uso;
+use app\models\Dispositivo;
 use app\models\UsoSearch;
 use app\models\LoginForm;
 use app\models\ContactForm;
@@ -61,14 +61,13 @@ class SiteController extends Controller
         if (Yii::$app->user->isGuest) {
             return $this->redirect(['login']);
         }
-        $dataProvider = new ActiveDataProvider([
-            'query' => Uso::find()->
-            where([
-                'idDispositivo' => 'iBJUyGUd9TWjH6M/PLnXwITvWqQSXkHTztN3lNBLsOk='
-            ])
-        ]);
+
+        $dispositivo = Dispositivo::find()->where(['idAdmin' => Yii::$app->user->identity->idAdmin])->one();
+        $searchModel = new UsoSearch(['idDispositivo' => $dispositivo->idDispositivo]);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }

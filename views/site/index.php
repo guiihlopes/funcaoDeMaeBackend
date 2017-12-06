@@ -6,15 +6,18 @@ use yii\grid\GridView;
 $this->title = 'Dashboard';
 ?>
         <div class="container">
+            <?= $this->render('/uso/_dispositivosAdmin', ['model' => $searchModel]); ?>
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
                 'columns' => [
                     ['class' => 'yii\grid\SerialColumn'],
 
+                    // 'idUso',
                     'tempoUso',
                     'dtUso',
                     'consumoMedio',
                     'idTag',
+                    // 'idDispositivo',
 
                     ['class' => 'yii\grid\ActionColumn'],
                 ],
