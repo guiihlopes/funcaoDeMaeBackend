@@ -10,12 +10,13 @@ use yii\grid\GridView;
 $this->title = 'Tags';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="container">
+<div class="tag-index">
 
+    <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Cadastrar uma tag', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Tag', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -26,6 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'apelidoTag',
             'limMaxTempoUso',
             'qtdeUsoDia',
+            // 'idAdmin',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

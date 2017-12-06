@@ -36,7 +36,7 @@ class TagController extends Controller
     public function actionIndex()
     {
         $searchModel = new TagSearch();
-        $dataProvider = $searchModel->search(['TagSearch' => ['idAdm' => Yii::$app->user->identity->idAdmin]]);
+        $dataProvider = $searchModel->search(['TagSearch' => ['idAdmin' => Yii::$app->user->identity->idAdmin]]);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -66,7 +66,7 @@ class TagController extends Controller
         $model = new Tag();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->idAdm = Yii::$app->user->identity->idAdmin;
+            $model->idAdmin = Yii::$app->user->identity->idAdmin;
             $model->save();
             return $this->redirect(['view', 'id' => $model->idTag]);
         } else {

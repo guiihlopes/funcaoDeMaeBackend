@@ -15,6 +15,8 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
+    <?= $form->field($model, 'idIndexTag') ?>
+
     <?= $form->field($model, 'idTag') ?>
 
     <?= $form->field($model, 'apelidoTag') ?>
@@ -23,7 +25,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'qtdeUsoDia') ?>
 
-    <?= $form->field($model, 'idAdm') ?>
+    <?php // echo $form->field($model, 'idAdmin') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

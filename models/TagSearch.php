@@ -18,7 +18,7 @@ class TagSearch extends Tag
     public function rules()
     {
         return [
-            [['idTag', 'limMaxTempoUso', 'qtdeUsoDia', 'idAdm'], 'integer'],
+            [['idIndexTag', 'idTag', 'limMaxTempoUso', 'qtdeUsoDia', 'idAdmin'], 'integer'],
             [['apelidoTag'], 'safe'],
         ];
     }
@@ -59,10 +59,11 @@ class TagSearch extends Tag
 
         // grid filtering conditions
         $query->andFilterWhere([
+            'idIndexTag' => $this->idIndexTag,
             'idTag' => $this->idTag,
             'limMaxTempoUso' => $this->limMaxTempoUso,
             'qtdeUsoDia' => $this->qtdeUsoDia,
-            'idAdm' => $this->idAdm,
+            'idAdmin' => $this->idAdmin,
         ]);
 
         $query->andFilterWhere(['like', 'apelidoTag', $this->apelidoTag]);
