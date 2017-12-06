@@ -10,8 +10,8 @@ use Yii;
  * @property integer $idTag
  * @property string $idDispositivo
  *
- * @property Tag $idTag0
  * @property Dispositivo $idDispositivo0
+ * @property Tag $idTag0
  */
 class TagDispositivo extends \yii\db\ActiveRecord
 {
@@ -32,8 +32,8 @@ class TagDispositivo extends \yii\db\ActiveRecord
             [['idTag', 'idDispositivo'], 'required'],
             [['idTag'], 'integer'],
             [['idDispositivo'], 'string'],
-            [['idTag'], 'exist', 'skipOnError' => true, 'targetClass' => Tag::className(), 'targetAttribute' => ['idTag' => 'idTag']],
             [['idDispositivo'], 'exist', 'skipOnError' => true, 'targetClass' => Dispositivo::className(), 'targetAttribute' => ['idDispositivo' => 'idDispositivo']],
+            [['idTag'], 'exist', 'skipOnError' => true, 'targetClass' => Tag::className(), 'targetAttribute' => ['idTag' => 'idTag']],
         ];
     }
 
@@ -51,16 +51,16 @@ class TagDispositivo extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTag()
+    public function getDispositivo()
     {
-        return $this->hasOne(Tag::className(), ['idTag' => 'idTag']);
+        return $this->hasOne(Dispositivo::className(), ['idDispositivo' => 'idDispositivo']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getDispositivo()
+    public function getTag()
     {
-        return $this->hasOne(Dispositivo::className(), ['idDispositivo' => 'idDispositivo']);
+        return $this->hasOne(Tag::className(), ['idTag' => 'idTag']);
     }
 }

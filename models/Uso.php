@@ -14,8 +14,8 @@ use Yii;
  * @property integer $idTag
  * @property string $idDispositivo
  *
- * @property Tag $idTag0
  * @property Dispositivo $idDispositivo0
+ * @property Tag $idTag0
  */
 class Uso extends \yii\db\ActiveRecord
 {
@@ -35,11 +35,10 @@ class Uso extends \yii\db\ActiveRecord
         return [
             [['tempoUso', 'dtUso', 'consumoMedio', 'idTag', 'idDispositivo'], 'required'],
             [['tempoUso', 'idTag'], 'integer'],
-            [['dtUso'], 'safe'],
+            [['dtUso', 'idDispositivo'], 'string'],
             [['consumoMedio'], 'number'],
-            [['idDispositivo'], 'string'],
-            [['idTag'], 'exist', 'skipOnError' => true, 'targetClass' => Tag::className(), 'targetAttribute' => ['idTag' => 'idTag']],
             [['idDispositivo'], 'exist', 'skipOnError' => true, 'targetClass' => Dispositivo::className(), 'targetAttribute' => ['idDispositivo' => 'idDispositivo']],
+            [['idTag'], 'exist', 'skipOnError' => true, 'targetClass' => Tag::className(), 'targetAttribute' => ['idTag' => 'idTag']],
         ];
     }
 
@@ -50,20 +49,12 @@ class Uso extends \yii\db\ActiveRecord
     {
         return [
             'idUso' => 'Id Uso',
-            'tempoUso' => 'Tempo de uso',
-            'dtUso' => 'Data de uso',
-            'consumoMedio' => 'Consumo médio',
-            'idTag' => 'Tag',
+            'tempoUso' => 'Tempo Uso',
+            'dtUso' => 'Dt Uso',
+            'consumoMedio' => 'Consumo Medio',
+            'idTag' => 'Id Tag',
             'idDispositivo' => 'Id Dispositivo',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTag()
-    {
-        return $this->hasOne(Tag::className(), ['idTag' => 'idTag']);
     }
 
     /**
@@ -72,5 +63,13 @@ class Uso extends \yii\db\ActiveRecord
     public function getDispositivo()
     {
         return $this->hasOne(Dispositivo::className(), ['idDispositivo' => 'idDispositivo']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTag()
+    {
+        return $this->hasOne(Tag::className(), ['idTag' => 'idTag']);
     }
 }

@@ -7,13 +7,13 @@ use Yii;
 /**
  * This is the model class for table "tag".
  *
+ * @property integer $idIndexTag
  * @property integer $idTag
  * @property string $apelidoTag
  * @property integer $limMaxTempoUso
  * @property integer $qtdeUsoDia
- * @property integer $idAdm
+ * @property integer $idAdmin
  *
- * @property Administrador $idAdm0
  * @property TagDispositivo[] $tagDispositivos
  * @property Uso[] $usos
  */
@@ -33,10 +33,9 @@ class Tag extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idTag', 'apelidoTag'], 'required'],
-            [['idTag', 'limMaxTempoUso', 'qtdeUsoDia', 'idAdm'], 'integer'],
+            [['idTag', 'apelidoTag', 'idAdmin'], 'required'],
+            [['idTag', 'limMaxTempoUso', 'qtdeUsoDia', 'idAdmin'], 'integer'],
             [['apelidoTag'], 'string'],
-            [['idAdm'], 'exist', 'skipOnError' => true, 'targetClass' => Administrador::className(), 'targetAttribute' => ['idAdm' => 'idAdmin']],
         ];
     }
 
@@ -46,20 +45,13 @@ class Tag extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
+            'idIndexTag' => 'Id Index Tag',
             'idTag' => 'Id Tag',
-            'apelidoTag' => 'Apelido da tag',
-            'limMaxTempoUso' => 'Limite máximo tempo de uso',
-            'qtdeUsoDia' => 'Quantidade de uso por dia',
-            'idAdm' => 'Id Adm',
+            'apelidoTag' => 'Apelido Tag',
+            'limMaxTempoUso' => 'Lim Max Tempo Uso',
+            'qtdeUsoDia' => 'Qtde Uso Dia',
+            'idAdmin' => 'Id Admin',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getAdministrador()
-    {
-        return $this->hasOne(Administrador::className(), ['idAdmin' => 'idAdm']);
     }
 
     /**
@@ -76,5 +68,10 @@ class Tag extends \yii\db\ActiveRecord
     public function getUsos()
     {
         return $this->hasMany(Uso::className(), ['idTag' => 'idTag']);
+    }
+    
+    public function getAdministrador()
+    {
+        return $this->hasOne(Administrador::className(), ['idAdmin' => 'idAdmin']);
     }
 }

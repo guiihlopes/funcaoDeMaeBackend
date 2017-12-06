@@ -11,9 +11,8 @@ use Yii;
  * @property string $apelidoDispositivo
  * @property integer $nivelBattDispositivo
  * @property integer $limiteEnergia
- * @property integer $idAdm
+ * @property integer $idAdmin
  *
- * @property Administrador $idAdm0
  * @property TagDispositivo[] $tagDispositivos
  * @property Uso[] $usos
  */
@@ -35,15 +34,14 @@ class Dispositivo extends \yii\db\ActiveRecord
         return [
             [['idDispositivo', 'apelidoDispositivo'], 'required'],
             [['idDispositivo', 'apelidoDispositivo'], 'string'],
-            [['nivelBattDispositivo', 'limiteEnergia', 'idAdm'], 'integer'],
             ['idDispositivo', 'isValidDispositivo'],
-            [['idAdm'], 'exist', 'skipOnError' => true, 'targetClass' => Administrador::className(), 'targetAttribute' => ['idAdm' => 'idAdmin']],
+            [['nivelBattDispositivo', 'limiteEnergia', 'idAdmin'], 'integer'],
         ];
     }
 
     public function isValidDispositivo($attribute, $params)
     {
-        $dispositivo = $this::find($this->idDispositivo)->where(['idAdm' => null])->all();
+        $dispositivo = $this::find($this->idDispositivo)->where(['idAdmin' => null])->all();
 
 
         if (!$dispositivo) {
@@ -57,20 +55,12 @@ class Dispositivo extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'idDispositivo' => 'Serial do dispositivo',
-            'apelidoDispositivo' => 'Apelido do dispositivo',
-            'nivelBattDispositivo' => 'Nivel de bateria do dispositivo',
-            'limiteEnergia' => 'Limite de energia',
-            'idAdm' => 'Id Adm',
+            'idDispositivo' => 'Id Dispositivo',
+            'apelidoDispositivo' => 'Apelido Dispositivo',
+            'nivelBattDispositivo' => 'Nivel Batt Dispositivo',
+            'limiteEnergia' => 'Limite Energia',
+            'idAdmin' => 'Id Admin',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getAdministrador()
-    {
-        return $this->hasOne(Administrador::className(), ['idAdmin' => 'idAdm']);
     }
 
     /**
@@ -87,5 +77,9 @@ class Dispositivo extends \yii\db\ActiveRecord
     public function getUsos()
     {
         return $this->hasMany(Uso::className(), ['idDispositivo' => 'idDispositivo']);
+    }
+     public function getAdministrador()
+    {
+        return $this->hasOne(Administrador::className(), ['idAdmin' => 'idAdmin']);
     }
 }

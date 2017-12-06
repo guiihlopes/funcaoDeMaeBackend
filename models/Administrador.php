@@ -21,9 +21,6 @@ use Yii;
  * @property string $cidade
  * @property string $estado
  * @property string $telefone
- *
- * @property Dispositivo[] $dispositivos
- * @property Tag[] $tags
  */
 class Administrador extends \yii\db\ActiveRecord
 {
@@ -67,21 +64,5 @@ class Administrador extends \yii\db\ActiveRecord
             'estado' => 'Estado',
             'telefone' => 'Telefone',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getDispositivos()
-    {
-        return $this->hasMany(Dispositivo::className(), ['idAdm' => 'idAdmin']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTags()
-    {
-        return $this->hasMany(Tag::className(), ['idAdm' => 'idAdmin']);
     }
 }
