@@ -4,26 +4,28 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\DispositivoSearch */
+/* @var $model app\models\UsoSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="dispositivo-search">
+<div class="uso-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'idDispositivo') ?>
+    <?= $form->field($model, 'idUso') ?>
 
-    <?= $form->field($model, 'apelidoDispositivo') ?>
+    <?= $form->field($model, 'tempoUso') ?>
 
-    <?= $form->field($model, 'nivelBattDispositivo') ?>
+    <?= $form->field($model, 'dtUso') ?>
 
-    <?= $form->field($model, 'limiteEnergia') ?>
+    <?= $form->field($model, 'consumoMedio') ?>
 
-    <?= $form->field($model, 'idAdmin') ?>
+    <?= $form->field($model, 'idTag') ?>
+
+    <?php // echo $form->field($model, 'idDispositivo') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

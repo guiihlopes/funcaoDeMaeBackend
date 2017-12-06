@@ -41,8 +41,7 @@ class Dispositivo extends \yii\db\ActiveRecord
 
     public function isValidDispositivo($attribute, $params)
     {
-        $dispositivo = $this::find($this->idDispositivo)->where(['idAdmin' => null])->all();
-
+        $dispositivo = $this::find()->where(['idDispositivo' => $this->idDispositivo])->andWhere(['idAdmin' => null])->all();
 
         if (!$dispositivo) {
             $this->addError($attribute, 'Serial inválido ou já utilizado previamente!');
@@ -55,10 +54,10 @@ class Dispositivo extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'idDispositivo' => 'Id Dispositivo',
+            'idDispositivo' => 'Serial do dispositivo',
             'apelidoDispositivo' => 'Apelido Dispositivo',
-            'nivelBattDispositivo' => 'Nivel Batt Dispositivo',
-            'limiteEnergia' => 'Limite Energia',
+            'nivelBattDispositivo' => 'Nivel de bateria Dispositivo',
+            'limiteEnergia' => 'Limite de Energia',
             'idAdmin' => 'Id Admin',
         ];
     }

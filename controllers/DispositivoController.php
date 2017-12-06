@@ -38,7 +38,7 @@ class DispositivoController extends Controller
     public function actionIndex()
     {
         $searchModel = new DispositivoSearch();
-        $dataProvider = $searchModel->search(['DispositivoSearch' => ['idAdm' => Yii::$app->user->identity->idAdmin]]);
+        $dataProvider = $searchModel->search(['DispositivoSearch' => ['idAdmin' => Yii::$app->user->identity->idAdmin]]);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
@@ -72,9 +72,13 @@ class DispositivoController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->idAdm = Yii::$app->user->identity->idAdmin;
-            if($model->validate()){
-                $model->save();
+            $dispositivo = $this->findModel($model->idDispositivo);
+            $dispositivo->idAdmin = Yii::$app->user->identity->idAdmin;
+            $dispositivo->apelidoDispositivo = $model->apelidoDispositivo;
+            $dispositivo->limiteEnergia = $model->limiteEnergia;
+            if($dispositivo->validate()){
+                $dispositivo->save();
+                return $this->redirect(['index']);
             }
         }
         

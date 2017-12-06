@@ -20,6 +20,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'cpf')->textInput() ?>
 
+    <?= $form->field($model, 'dtNasc')->textInput() ?>
+
     <?= $form->field($model, 'cep')->textInput() ?>
 
     <?= $form->field($model, 'logradouro')->textInput() ?>

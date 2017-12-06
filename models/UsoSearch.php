@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Dispositivo;
+use app\models\Uso;
 
 /**
- * DispositivoSearch represents the model behind the search form about `app\models\Dispositivo`.
+ * UsoSearch represents the model behind the search form about `app\models\Uso`.
  */
-class DispositivoSearch extends Dispositivo
+class UsoSearch extends Uso
 {
     /**
      * @inheritdoc
@@ -18,8 +18,9 @@ class DispositivoSearch extends Dispositivo
     public function rules()
     {
         return [
-            [['idDispositivo', 'apelidoDispositivo'], 'safe'],
-            [['nivelBattDispositivo', 'limiteEnergia', 'idAdmin'], 'integer'],
+            [['idUso', 'tempoUso', 'idTag'], 'integer'],
+            [['dtUso', 'idDispositivo'], 'safe'],
+            [['consumoMedio'], 'number'],
         ];
     }
 
@@ -41,7 +42,7 @@ class DispositivoSearch extends Dispositivo
      */
     public function search($params)
     {
-        $query = Dispositivo::find();
+        $query = Uso::find();
 
         // add conditions that should always apply here
 
@@ -59,13 +60,14 @@ class DispositivoSearch extends Dispositivo
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'nivelBattDispositivo' => $this->nivelBattDispositivo,
-            'limiteEnergia' => $this->limiteEnergia,
-            'idAdmin' => $this->idAdmin,
+            'idUso' => $this->idUso,
+            'tempoUso' => $this->tempoUso,
+            'consumoMedio' => $this->consumoMedio,
+            'idTag' => $this->idTag,
         ]);
 
-        $query->andFilterWhere(['like', 'idDispositivo', $this->idDispositivo])
-            ->andFilterWhere(['like', 'apelidoDispositivo', $this->apelidoDispositivo]);
+        $query->andFilterWhere(['like', 'dtUso', $this->dtUso])
+            ->andFilterWhere(['like', 'idDispositivo', $this->idDispositivo]);
 
         return $dataProvider;
     }
