@@ -63,7 +63,8 @@ class SiteController extends Controller
             return $this->redirect(['login']);
         }
 
-        $dispositivo = Dispositivo::find()->where(['idAdmin' => Yii::$app->user->identity->idAdmin])->all();
+        $dispositivo = new Dispositivo();
+        $dispositivo = $dispositivo->administradorDispositivos;
         $dispositivoIds = ArrayHelper::getColumn($dispositivo, 'idDispositivo');
         $searchModel = new UsoSearch(['idDispositivo' => $dispositivoIds]);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);

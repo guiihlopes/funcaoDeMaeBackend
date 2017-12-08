@@ -88,4 +88,8 @@ class Dispositivo extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Administrador::className(), ['idAdmin' => 'idAdmin']);
     }
+
+    public function getAdministradorDispositivos() {
+        return $this->find()->where(['idAdmin' => Yii::$app->user->identity->idAdmin])->all();
+    }
 }
