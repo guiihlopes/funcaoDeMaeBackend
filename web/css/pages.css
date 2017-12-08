@@ -134,6 +134,10 @@ File: Pages
   color: #ff5b5b;
   font-size: 12px;
   font-weight: 500;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 8px;
+  overflow: hidden;
 }
 /* X-Editable */
 .editable-click,

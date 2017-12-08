@@ -39,6 +39,7 @@ class Administrador extends \yii\db\ActiveRecord
     {
         return [
             [['email', 'senha', 'nome', 'cpf', 'dtNasc', 'cep', 'logradouro', 'numero', 'bairro', 'cidade', 'estado', 'telefone'], 'required'],
+            [['email'], 'email'],
             [['email', 'senha', 'nome', 'cpf', 'dtNasc', 'cep', 'logradouro', 'numero', 'complemento', 'bairro', 'cidade', 'estado', 'telefone'], 'string'],
         ];
     }
@@ -53,11 +54,11 @@ class Administrador extends \yii\db\ActiveRecord
             'email' => 'Email',
             'senha' => 'Senha',
             'nome' => 'Nome',
-            'cpf' => 'Cpf',
-            'dtNasc' => 'Dt Nasc',
-            'cep' => 'Cep',
-            'logradouro' => 'Logradouro',
-            'numero' => 'Numero',
+            'cpf' => 'CPF',
+            'dtNasc' => 'Data de nascimento',
+            'cep' => 'CEP',
+            'logradouro' => 'Endereço',
+            'numero' => 'Número',
             'complemento' => 'Complemento',
             'bairro' => 'Bairro',
             'cidade' => 'Cidade',

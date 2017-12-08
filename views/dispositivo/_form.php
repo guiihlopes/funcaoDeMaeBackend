@@ -12,11 +12,9 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'idDispositivo')->textInput() ?>
+    <?= $form->field($model, 'idDispositivo')->textInput(['disabled' => true]) ?>
 
     <?= $form->field($model, 'apelidoDispositivo')->textInput() ?>
-
-    <?= $form->field($model, 'nivelBattDispositivo')->textInput() ?>
 
     <?= $form->field($model, 'limiteEnergia')->textInput() ?>
 

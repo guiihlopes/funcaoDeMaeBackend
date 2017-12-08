@@ -667,6 +667,7 @@ input.form-control:-ms-input-placeholder {
 .form-horizontal .form-group {
   margin-left: -10px;
   margin-right: -10px;
+  margin-bottom: 0px;
 }
 .form-control-feedback {
   line-height: 36px !important;
@@ -1355,4 +1356,12 @@ blockquote.pull-right {
     margin-left: 0px;
     margin-top: 0px;
   }
+}
+
+
+
+/* Custom */
+.form-horizontal .label-register .control-label{
+  text-align: left;
+  width: 100%;
 }
