@@ -6,6 +6,7 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
+use yii\helpers\ArrayHelper;
 use yii\filters\VerbFilter;
 use app\models\Uso;
 use app\models\Dispositivo;
@@ -62,13 +63,33 @@ class SiteController extends Controller
             return $this->redirect(['login']);
         }
 
-        $dispositivo = Dispositivo::find()->where(['idAdmin' => Yii::$app->user->identity->idAdmin])->one();
-        $searchModel = new UsoSearch(['idDispositivo' => $dispositivo->idDispositivo]);
+        $dispositivo = Dispositivo::find()->where(['idAdmin' => Yii::$app->user->identity->idAdmin])->all();
+        $dispositivoIds = ArrayHelper::getColumn($dispositivo, 'idDispositivo');
+        $searchModel = new UsoSearch(['idDispositivo' => $dispositivoIds]);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $models = $dataProvider->getModels();
+        $naoTemResultados = !count($models);
+        $consumoMaximo = $naoTemResultados ? 0 : $dataProvider->query->max('consumoMedio');
+        $consumoTotal = $naoTemResultados ? 0 : $dataProvider->query->sum('consumoMedio');
+        $consumoTotalMedio = $naoTemResultados ? 0 : $consumoTotal/count($models);
+        $tempoUsoMaximo = $naoTemResultados ? 0 : $dataProvider->query->max('tempoUso');
+        $tempoUsoTotalMedio = $naoTemResultados ? 0 : $dataProvider->query->sum('tempoUso')/count($models);
+        $modelsByTag = ArrayHelper::map($models, 'idUso', function($data) {
+            return [
+                'consumoMedio' => $data['consumoMedio'],
+                'tempoUso' => $data['tempoUso'],
+            ];
+        }, 'tag.apelidoTag');
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'modelsByTagName' => $modelsByTag,
+            'consumoMaximo' => $consumoMaximo,
+            'consumoTotal' => $consumoTotal,
+            'consumoTotalMedio' => $consumoTotalMedio,
+            'tempoUsoMaximo' => $tempoUsoMaximo,
+            'tempoUsoTotalMedio' => $tempoUsoTotalMedio,
         ]);
     }
 

@@ -69,8 +69,10 @@ class UsoSearch extends Uso
         ]);
 
         $query->andFilterWhere(['like', 'dtUso', $this->dtUso])
-            ->andFilterWhere(['like', 'uso.idDispositivo', $this->idDispositivo])
-            ->andFilterWhere(['like', 'dispositivo.idDispositivo', $this->idDispositivo]);
+            ->andFilterWhere([
+                'uso.idDispositivo' => $this->idDispositivo,
+                'dispositivo.idDispositivo' => $this->idDispositivo,
+            ]);
 
         return $dataProvider;
     }

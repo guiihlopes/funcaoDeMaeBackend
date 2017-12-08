@@ -21,6 +21,15 @@ $config = [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'assetManager' => [
+            'bundles' => [
+                'yii\grid\GridViewAsset' => [
+                    'depends' => [
+                        'app\assets\AppAsset'
+                    ]
+                ],
+            ],
+        ],
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,

@@ -17,7 +17,7 @@ use app\models\Dispositivo;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'idDispositivo')->dropDownList(ArrayHelper::map(Dispositivo::find()->where(['idAdmin' => Yii::$app->user->identity->idAdmin])->all(), 'idDispositivo', 'apelidoDispositivo'))->label('Serial do dispositivo') ?>
+    <?= $form->field($model, 'idDispositivo')->dropDownList(ArrayHelper::map(Dispositivo::find()->where(['idAdmin' => Yii::$app->user->identity->idAdmin])->all(), 'idDispositivo', 'apelidoDispositivo'), ['prompt' => 'Todos'])->label('Serial do dispositivo') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Ver relatório', ['class' => 'btn btn-primary']) ?>

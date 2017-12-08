@@ -50,10 +50,10 @@ class Uso extends \yii\db\ActiveRecord
         return [
             'idUso' => 'Id Uso',
             'tempoUso' => 'Tempo Uso',
-            'dtUso' => 'Dt Uso',
+            'dtUso' => 'Data de uso',
             'consumoMedio' => 'Consumo Medio',
-            'idTag' => 'Id Tag',
-            'idDispositivo' => 'Id Dispositivo',
+            'idTag' => 'Tag',
+            'idDispositivo' => 'Dispositivo',
         ];
     }
 

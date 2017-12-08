@@ -7,55 +7,49 @@ $this->title = 'Dashboard';
 ?>
         <div class="container">
             <?= $this->render('/uso/_dispositivosAdmin', ['model' => $searchModel]); ?>
-            <?= GridView::widget([
-                'dataProvider' => $dataProvider,
-                'columns' => [
-                    ['class' => 'yii\grid\SerialColumn'],
-
-                    // 'idUso',
-                    'tempoUso',
-                    'dtUso',
-                    'consumoMedio',
-                    'idTag',
-                    // 'idDispositivo',
-
-                    ['class' => 'yii\grid\ActionColumn'],
-                ],
-            ]); ?>
             <div class="row">
                 <div class="col-lg-3 col-md-6">
                     <div class="card-box">
-                        <div class="dropdown pull-right">
-                            <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
-                                <i class="zmdi zmdi-more-vert"></i>
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                            </ul>
-                        </div>
-
-                        <h4 class="header-title m-t-0 m-b-30">Statistics</h4>
+                        <h4 class="header-title m-t-0 m-b-30">Maior consumo vs Consumo total</h4>
 
                         <div class="widget-chart-1">
                             <div class="widget-chart-box-1">
-                                <input data-plugin="knob" data-width="80" data-height="80" data-fgColor="#ffbd4a"
-                                    data-bgColor="#FFE6BA" value="80"
+                                <input data-plugin="knob" data-width="100" data-height="100" data-fgColor="#f05050"
+                                    data-bgColor="#F9B9B9" value="<?= !$consumoTotal ? 0 : (($consumoMaximo/$consumoTotal) * 100) ?>"
                                     data-skin="tron" data-angleOffset="180" data-readOnly=true
                                     data-thickness=".15"/>
                             </div>
                             <div class="widget-detail-1">
-                                <h2 class="p-t-10 m-b-0"> 4569 </h2>
-                                <p class="text-muted">Revenue today</p>
+                                <h4 class="p-t-10 m-b-0"> <?= $consumoMaximo . ' watts'?> </h4>
+                                <p class="text-muted">Maior consumo</p>
+                                <h4 class="p-t-10 m-b-0"> <?= $consumoTotal . ' watts'?> </h4>
+                                <p class="text-muted">Consumo total</p>
                             </div>
                         </div>
                     </div>
                 </div><!-- end col -->
             </div>
             <!-- end row -->
-
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'columns' => [
+                    [
+                        'attribute' => 'tempoUso',
+                        'value' => function ($data) {
+                            return (number_format($data['tempoUso']/60, 0)).' minutos';
+                        }
+                    ],
+                    'dtUso',
+                    [
+                        'attribute' => 'consumoMedio',
+                        'format' => 'raw',
+                        'value' => function ($data) use ($consumoTotal){
+                            return "<span data-plugin='peity-donut-alt' data-width='50' data-height='50' data-peity='{ 'fill': ['#71b6f9`', '#435966'], 'innerRadius': 18, 'radius': 28 }''>". $data['consumoMedio']. '/' . $consumoTotal ."</span>" . " " . $data['consumoMedio'].'w';
+                        }
+                    ],
+                    'tag.apelidoTag',
+                    // 'idDispositivo',
+                ],
+            ]); ?>
         </div>
         <!-- container -->

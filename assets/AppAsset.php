@@ -39,6 +39,7 @@ class AppAsset extends AssetBundle
         "js/jquery.nicescroll.js",
         "js/jquery.scrollTo.min.js",
         "js/jquery.knob.js",
+        "js/jquery.peity.min.js",
         // "js/morris.min.js",
         "js/raphael-min.js",
         // "js/jquery.dashboard.js",
