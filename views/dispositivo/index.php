@@ -26,6 +26,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'nivelBattDispositivo',
             'limiteEnergia',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'buttons' => [
+                    'view' => function($url, $mode){
+                        return '';
+                    }
+                ]
+            ],
         ],
     ]); ?>

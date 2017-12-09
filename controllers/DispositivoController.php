@@ -10,6 +10,7 @@ use yii\web\Response;
 use yii\widgets\ActiveForm;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * DispositivoController implements the CRUD actions for Dispositivo model.
@@ -19,9 +20,23 @@ class DispositivoController extends Controller
     /**
      * @inheritdoc
      */
-    public function behaviors()
+     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'update', 'create', 'view', 'delete'],
+                'rules' => [
+                    [
+                        'actions' => ['index', 'update', 'create', 'view', 'delete'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            return (Yii::$app->user->identity !== null);
+                        }
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -29,7 +44,7 @@ class DispositivoController extends Controller
                 ],
             ],
         ];
-    }
+    }   
 
     /**
      * Lists all Dispositivo models.
@@ -133,7 +148,7 @@ class DispositivoController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Dispositivo::findOne($id)) !== null) {
+        if (($model = Dispositivo::findOne($id)) !== null && $model->administrador->idAdmin === Yii::$app->user->identity->idAdmin) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -133,7 +133,7 @@ class TagController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Tag::findOne($id)) !== null) {
+        if (($model = Tag::findOne($id)) !== null && $model->administrador->idAdmin === Yii::$app->user->identity->idAdmin) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
