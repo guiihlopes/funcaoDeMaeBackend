@@ -67,7 +67,7 @@ class AdministradorController extends Controller
         $this->layout = 'guestLayout';
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idAdmin]);
+            return $this->redirect(['site/index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -86,7 +86,7 @@ class AdministradorController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idAdmin]);
+            return $this->redirect(['site/index']);
         } else {
             return $this->render('update', [
                 'model' => $model,

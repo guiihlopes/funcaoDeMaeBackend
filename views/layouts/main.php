@@ -101,7 +101,7 @@ AppAsset::register($this);
                         <h5><a href="#"><?= Yii::$app->user->identity->nome ?></a> </h5>
                         <ul class="list-inline">
                             <li>
-                                <a href="#" >
+                                <a href="<?= Url::toRoute(['administrador/update', 'id' => Yii::$app->user->identity->idAdmin]) ?>" >
                                     <i class="zmdi zmdi-settings"></i>
                                 </a>
                             </li>
@@ -146,7 +146,9 @@ AppAsset::register($this);
             <div class="content-page">
                 <!-- Start content -->
                 <div class="content">
-                    <?= $content ?>
+                    <div class="container">
+                        <?= $content ?>
+                    </div>
                 </div>
                 <footer class="footer text-right">
                     2017 © Função de mãe.

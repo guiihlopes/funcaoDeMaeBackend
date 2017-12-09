@@ -66,6 +66,7 @@ class DispositivoController extends Controller
     public function actionCreate()
     {
         $model = new Dispositivo();
+        $model->scenario = 'register';
 
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
             Yii::$app->response->format = Response::FORMAT_JSON;
@@ -115,7 +116,10 @@ class DispositivoController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $dispositivo = $this->findModel($id);
+
+        $dispositivo->idAdmin = '';
+        $dispositivo->save();
 
         return $this->redirect(['index']);
     }

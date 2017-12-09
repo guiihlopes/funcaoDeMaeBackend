@@ -27,6 +27,13 @@ class Tag extends \yii\db\ActiveRecord
         return 'tag';
     }
 
+    public function scenarios(){
+        $scenarios = parent::scenarios();
+
+        $scenarios['register'] = ['idTag', 'apelidoTag', 'limMaxTempoUso', 'qtdeUsoDia'];
+        return $scenarios;
+    }
+
     /**
      * @inheritdoc
      */
@@ -35,8 +42,27 @@ class Tag extends \yii\db\ActiveRecord
         return [
             [['idTag', 'apelidoTag'], 'required'],
             [['idTag', 'limMaxTempoUso', 'qtdeUsoDia', 'idAdmin'], 'integer'],
+            ['idTag', 'isValidTag', 'on' => 'register'],
             [['apelidoTag'], 'string'],
         ];
+    }
+
+    public function beforeSave($insert){
+        if($insert){
+            // convertendo de minutos para segundos
+            $this->limMaxTempoUso = $this->limMaxTempoUso*60;
+        }
+
+        return parent::beforeSave($insert);
+    }
+
+    public function isValidTag($attribute, $params)
+    {
+        $tag = $this::find()->where(['idTag' => $this->idTag])->andWhere(['idAdmin' => null])->all();
+
+        if (!$tag) {
+            $this->addError($attribute, 'Tag inválida ou já utilizada previamente!');
+        }
     }
 
     /**
@@ -46,10 +72,10 @@ class Tag extends \yii\db\ActiveRecord
     {
         return [
             'idIndexTag' => 'Id Index Tag',
-            'idTag' => 'Id Tag',
-            'apelidoTag' => 'Apelido Tag',
-            'limMaxTempoUso' => 'Lim Max Tempo Uso',
-            'qtdeUsoDia' => 'Qtde Uso Dia',
+            'idTag' => 'Número da tag',
+            'apelidoTag' => 'Apelido da tag',
+            'limMaxTempoUso' => 'Máximo tempo uso (s)',
+            'qtdeUsoDia' => 'Quantidade de uso por dia',
             'idAdmin' => 'Id Admin',
         ];
     }

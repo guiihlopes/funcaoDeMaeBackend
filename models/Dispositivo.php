@@ -29,6 +29,8 @@ class Dispositivo extends \yii\db\ActiveRecord
     public function scenarios(){
         $scenarios = parent::scenarios();
 
+        $scenarios['register'] = ['idDispositivo', 'apelidoDispositivo', 'nivelBattDispositivo', 'limiteEnergia'];
+
         return $scenarios;
     }
 

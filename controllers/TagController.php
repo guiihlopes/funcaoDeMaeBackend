@@ -5,6 +5,8 @@ namespace app\controllers;
 use Yii;
 use app\models\Tag;
 use app\models\TagSearch;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -64,16 +66,28 @@ class TagController extends Controller
     public function actionCreate()
     {
         $model = new Tag();
+        $model->scenario = 'register';
+
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->idAdmin = Yii::$app->user->identity->idAdmin;
-            $model->save();
-            return $this->redirect(['view', 'id' => $model->idTag]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+            $tag = $this->findModel($model->idTag);
+            $tag->idAdmin = Yii::$app->user->identity->idAdmin;
+            $tag->apelidoTag = $model->apelidoTag;
+            $tag->limMaxTempoUso = $model->limMaxTempoUso;
+            $tag->qtdeUsoDia = $model->qtdeUsoDia;
+            if($tag->validate()){
+                $tag->save();
+                return $this->redirect(['index']);
+            }
         }
+        
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**
@@ -87,7 +101,7 @@ class TagController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->idTag]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -103,8 +117,10 @@ class TagController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $tag = $this->findModel($id);
 
+        $tag->idAdmin = '';
+        $tag->save();
         return $this->redirect(['index']);
     }
 

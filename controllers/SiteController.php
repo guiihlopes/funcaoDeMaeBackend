@@ -64,8 +64,7 @@ class SiteController extends Controller
         }
 
         $dispositivo = new Dispositivo();
-        $dispositivo = $dispositivo->administradorDispositivos;
-        $dispositivoIds = ArrayHelper::getColumn($dispositivo, 'idDispositivo');
+        $dispositivoIds = ArrayHelper::getColumn($dispositivo->administradorDispositivos, 'idDispositivo');
         $searchModel = new UsoSearch(['idDispositivo' => $dispositivoIds]);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $models = $dataProvider->getModels();

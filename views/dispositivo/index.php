@@ -10,7 +10,6 @@ use yii\grid\GridView;
 $this->title = 'Dispositivos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="container">
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
@@ -30,4 +29,3 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-</div>

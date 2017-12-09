@@ -62,7 +62,7 @@ use yii\widgets\MaskedInput;
         'mask' => '9999-9999{1,2}'
     ]) ?>
 
-    <div class="form-group text-center m-t-40">
+    <div class="<?= $model->isNewRecord ? 'form-group text-center m-t-40' : 'form-group'?>">
         <div class="col-xs-12">
             <?= Html::submitButton($model->isNewRecord ? 'Cadastrar' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-custom btn-bordred btn-block waves-effect waves-light' : 'btn btn-primary']) ?>
         </div>

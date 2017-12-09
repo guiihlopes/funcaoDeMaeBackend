@@ -29,14 +29,16 @@
 
             var $id = 'morris-donut-example';
             var $graphNode = document.querySelector('#' + $id);
-            var json = JSON.parse($graphNode.getAttribute('data-graph'));
-            var parsedJson = Object.keys(json).map(key => json[key]);
-            var colors = parsedJson.map(obj => obj.color);
-            var $donutData = parsedJson.map(obj => {
-                delete obj.color;
-                return obj;
-            });
-            this.createDonutChart($id, $donutData, colors);
+            if ($graphNode) {
+                var json = JSON.parse($graphNode.getAttribute('data-graph'));
+                var parsedJson = Object.keys(json).map(key => json[key]);
+                var colors = parsedJson.map(obj => obj.color);
+                var $donutData = parsedJson.map(obj => {
+                    delete obj.color;
+                    return obj;
+                });
+                this.createDonutChart($id, $donutData, colors);
+            }
         },
         //init
         $.Dashboard1 = new Dashboard1, $.Dashboard1.Constructor = Dashboard1
