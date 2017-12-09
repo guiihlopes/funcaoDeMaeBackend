@@ -24,12 +24,21 @@ use Yii;
  */
 class Administrador extends \yii\db\ActiveRecord
 {
+    public $idDispositivo;
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
         return 'administrador';
+    }
+
+    public function scenarios(){
+        $scenarios = parent::scenarios();
+
+        $scenarios['register'] = ['idDispositivo', 'email', 'senha', 'nome', 'cpf', 'dtNasc', 'cep', 'logradouro', 'numero', 'bairro', 'cidade', 'estado', 'telefone'];
+
+        return $scenarios;
     }
 
     /**
@@ -40,8 +49,19 @@ class Administrador extends \yii\db\ActiveRecord
         return [
             [['email', 'senha', 'nome', 'cpf', 'dtNasc', 'cep', 'logradouro', 'numero', 'bairro', 'cidade', 'estado', 'telefone'], 'required'],
             [['email'], 'email'],
+            [['idDispositivo'], 'required', 'on' => 'register'],
+            ['idDispositivo', 'isValidDispositivo', 'on' => 'register'],
             [['email', 'senha', 'nome', 'cpf', 'dtNasc', 'cep', 'logradouro', 'numero', 'complemento', 'bairro', 'cidade', 'estado', 'telefone'], 'string'],
         ];
+    }
+
+    public function isValidDispositivo($attribute, $params)
+    {
+        $dispositivo = Dispositivo::find()->where(['idDispositivo' => $this->idDispositivo])->andWhere(['idAdmin' => null])->all();
+
+        if (!$dispositivo) {
+            $this->addError($attribute, 'Serial inválido ou já utilizado previamente!');
+        }
     }
 
     /**
@@ -64,6 +84,7 @@ class Administrador extends \yii\db\ActiveRecord
             'cidade' => 'Cidade',
             'estado' => 'Estado',
             'telefone' => 'Telefone',
+            'idDispositivo' => 'Serial do dispositivo',
         ];
     }
 }

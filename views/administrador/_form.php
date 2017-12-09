@@ -12,7 +12,8 @@ use yii\widgets\MaskedInput;
 <div class="administrador-form">
 
     <?php $form = ActiveForm::begin([
-        'id' => 'create-form',
+        'id' => 'admin-create-form',
+        'enableAjaxValidation' => true,
         'layout' => 'horizontal',
         'fieldConfig' => [
             'template' => "<div class=\"label-register\">{label}</div><div class=\"col-xs-12\">{input}</div>\n{error}",
@@ -61,6 +62,12 @@ use yii\widgets\MaskedInput;
     widget(MaskedInput::className(), [
         'mask' => '9999-9999{1,2}'
     ]) ?>
+
+    <?php 
+        if($model->isNewRecord){
+            echo $form->field($model, 'idDispositivo')->textInput();
+        }
+    ?>
 
     <div class="<?= $model->isNewRecord ? 'form-group text-center m-t-40' : 'form-group'?>">
         <div class="col-xs-12">

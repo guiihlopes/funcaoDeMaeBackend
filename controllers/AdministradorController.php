@@ -6,6 +6,8 @@ use Yii;
 use app\models\Administrador;
 use app\models\AdministradorSearch;
 use yii\web\Controller;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -64,7 +66,13 @@ class AdministradorController extends Controller
     public function actionCreate()
     {
         $model = new Administrador();
+        $model->scenario = 'register';
         $this->layout = 'guestLayout';
+
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['site/index']);
