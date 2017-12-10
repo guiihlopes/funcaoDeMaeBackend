@@ -74,11 +74,12 @@ class TagController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post())) {
-            $tag = $this->findModel($model->idTag);
+            $tag = $this->findModel($model->idTag, true);
             $tag->idAdmin = Yii::$app->user->identity->idAdmin;
             $tag->apelidoTag = $model->apelidoTag;
             $tag->limMaxTempoUso = $model->limMaxTempoUso;
             $tag->qtdeUsoDia = $model->qtdeUsoDia;
+            $tag->dispositivos = $model->dispositivos;
             if($tag->validate()){
                 $tag->save();
                 return $this->redirect(['index']);
@@ -99,6 +100,11 @@ class TagController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        
+        $tagDispositivos = $model->getTagDispositivos()->all();
+        $dispositivos = \yii\helpers\ArrayHelper::getColumn($tagDispositivos, 'idDispositivo');
+        $model->dispositivos = $dispositivos;
+        $model->limMaxTempoUso = number_format($model->limMaxTempoUso/60, 0);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
@@ -118,7 +124,7 @@ class TagController extends Controller
     public function actionDelete($id)
     {
         $tag = $this->findModel($id);
-
+        $tag->scenario = 'delete';
         $tag->idAdmin = '';
         $tag->save();
         return $this->redirect(['index']);
@@ -131,9 +137,9 @@ class TagController extends Controller
      * @return Tag the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($id, $bypassAdmin = false)
     {
-        if (($model = Tag::findOne($id)) !== null && $model->administrador->idAdmin === Yii::$app->user->identity->idAdmin) {
+        if (($model = Tag::findOne($id)) !== null && ($bypassAdmin || $model->administrador->idAdmin === Yii::$app->user->identity->idAdmin)) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

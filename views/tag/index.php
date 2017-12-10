@@ -24,8 +24,24 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             'idTag',
             'apelidoTag',
-            'limMaxTempoUso',
+            [
+                'attribute' => 'limMaxTempoUso',
+                'value' => function ($data){
+                    return number_format($data['limMaxTempoUso']/60, 0) . ' min';
+                }
+            ],
             'qtdeUsoDia',
+            [
+                'label' => 'Dispositivos habilitados',
+                'value' => function ($data){
+                    $tagDispositivos = $data->tagDispositivos;
+                    $habilitados = [];
+                    foreach($tagDispositivos as $key => $value){
+                        array_push($habilitados, $value->dispositivo->apelidoDispositivo);
+                    }
+                    return implode($habilitados, ', ');
+                }
+            ],
             // 'idAdmin',
 
             ['class' => 'yii\grid\ActionColumn'],

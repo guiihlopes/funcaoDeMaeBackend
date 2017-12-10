@@ -4,6 +4,8 @@ namespace app\models;
 
 use Yii;
 
+use yii\helpers\ArrayHelper;
+
 /**
  * This is the model class for table "tag".
  *
@@ -19,6 +21,7 @@ use Yii;
  */
 class Tag extends \yii\db\ActiveRecord
 {
+    public $dispositivos;
     /**
      * @inheritdoc
      */
@@ -30,7 +33,8 @@ class Tag extends \yii\db\ActiveRecord
     public function scenarios(){
         $scenarios = parent::scenarios();
 
-        $scenarios['register'] = ['idTag', 'apelidoTag', 'limMaxTempoUso', 'qtdeUsoDia'];
+        $scenarios['register'] = ['idTag', 'dispositivos', 'apelidoTag', 'limMaxTempoUso', 'qtdeUsoDia'];
+        $scenarios['delete'] = [];
         return $scenarios;
     }
 
@@ -40,7 +44,8 @@ class Tag extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idTag', 'apelidoTag'], 'required'],
+            [['idTag', 'apelidoTag', 'dispositivos'], 'required'],
+            [['dispositivos'], 'safe', 'on' => 'register'],
             [['idTag', 'limMaxTempoUso', 'qtdeUsoDia', 'idAdmin'], 'integer'],
             ['idTag', 'isValidTag', 'on' => 'register'],
             [['apelidoTag'], 'string'],
@@ -48,9 +53,20 @@ class Tag extends \yii\db\ActiveRecord
     }
 
     public function beforeSave($insert){
-        if($insert){
-            // convertendo de minutos para segundos
+        $oldAttributes = $this->oldAttributes;
+        if($oldAttributes['limMaxTempoUso'] != $this->limMaxTempoUso){
             $this->limMaxTempoUso = $this->limMaxTempoUso*60;
+        }
+        if(count($this->dispositivos)){
+            TagDispositivo::deleteAll(['idTag' => $this->idTag]);
+            foreach($this->dispositivos as $key => $value){
+                $tagDispositivo = new TagDispositivo();
+                $tagDispositivo->idDispositivo = $value;
+                $tagDispositivo->idTag = $this->idTag;
+                if($tagDispositivo->validate()){
+                    $tagDispositivo->save();
+                }
+            }
         }
 
         return parent::beforeSave($insert);
@@ -74,7 +90,7 @@ class Tag extends \yii\db\ActiveRecord
             'idIndexTag' => 'Id Index Tag',
             'idTag' => 'Número da tag',
             'apelidoTag' => 'Apelido da tag',
-            'limMaxTempoUso' => 'Máximo tempo uso (s)',
+            'limMaxTempoUso' => 'Máximo tempo uso (min)',
             'qtdeUsoDia' => 'Quantidade de uso por dia',
             'idAdmin' => 'Id Admin',
         ];

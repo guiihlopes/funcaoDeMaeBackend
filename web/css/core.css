@@ -1365,3 +1365,11 @@ blockquote.pull-right {
   text-align: left;
   width: 100%;
 }
+
+.select2-container .select2-search--inline{
+  width: 200px!important;
+}
+
+.select2-container--krajee .select2-selection--multiple .select2-search--inline .select2-search__field{
+  width: 200px!important;
+}
