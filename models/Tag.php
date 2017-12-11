@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 
 use yii\helpers\ArrayHelper;
+use AzureIoTHub\DeviceClient;
 
 /**
  * This is the model class for table "tag".
@@ -47,6 +48,7 @@ class Tag extends \yii\db\ActiveRecord
             [['idTag', 'apelidoTag', 'dispositivos'], 'required'],
             [['dispositivos'], 'safe', 'on' => 'register'],
             [['idTag', 'limMaxTempoUso', 'qtdeUsoDia', 'idAdmin'], 'integer'],
+            [['qtdeUsoDia'], 'integer', 'min' => 1, 'max' => 5],
             ['idTag', 'isValidTag', 'on' => 'register'],
             [['apelidoTag'], 'string'],
         ];
@@ -63,9 +65,34 @@ class Tag extends \yii\db\ActiveRecord
                 $tagDispositivo = new TagDispositivo();
                 $tagDispositivo->idDispositivo = $value;
                 $tagDispositivo->idTag = $this->idTag;
+                $host = 'FuncaoDeMae.azure-devices.net';
+                $dispositivo = $tagDispositivo->dispositivo;
+                $deviceId = $dispositivo->idHub;
+                $deviceKey = $value;
+                $client = new DeviceClient($host, $deviceId, $deviceKey);
+                $response = $client->sendEvent([
+                    'limiteEnergia' => $dispositivo->limiteEnergia,
+                    'tagInserida' => $this->idTag,
+                    'tagExcluida' => "",
+                ]);
                 if($tagDispositivo->validate()){
                     $tagDispositivo->save();
                 }
+            }
+        }
+        // delete
+        if($this->idAdmin == ''){
+            foreach($this->tagDispositivos as $key => $value){
+                $host = 'FuncaoDeMae.azure-devices.net';
+                $dispositivo = $value->dispositivo;
+                $deviceId = $dispositivo->idHub;
+                $deviceKey = $dispositivo->idDispositivo;
+                $client = new DeviceClient($host, $deviceId, $deviceKey);
+                $response = $client->sendEvent([
+                    'limiteEnergia' => $dispositivo->limiteEnergia,
+                    'tagInserida' => "",
+                    'tagExcluida' => $this->idTag,
+                ]);
             }
         }
 

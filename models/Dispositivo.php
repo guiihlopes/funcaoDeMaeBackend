@@ -41,7 +41,7 @@ class Dispositivo extends \yii\db\ActiveRecord
     {
         return [
             [['idDispositivo', 'apelidoDispositivo'], 'required'],
-            [['idDispositivo', 'apelidoDispositivo'], 'string'],
+            [['idDispositivo', 'apelidoDispositivo', 'idHub'], 'string'],
             [['idDispositivo'], 'default', 'value'=> Yii::$app->user->identity->idAdmin],
             ['idDispositivo', 'isValidDispositivo', 'on' => 'register'],
             [['nivelBattDispositivo', 'limiteEnergia', 'idAdmin'], 'integer'],

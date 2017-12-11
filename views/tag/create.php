@@ -1,12 +1,13 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Tag */
 
-$this->title = 'Create Tag';
+$this->title = 'Cadastrar Tag';
 $this->params['breadcrumbs'][] = ['label' => 'Tags', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -16,7 +17,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $form = ActiveForm::begin([
     'id' => 'tag-form',
-    'enableAjaxValidation' => true
+    'enableClientValidation' => false,
+    'enableAjaxValidation' => true,
 ]);
 
 $default_buttons = [

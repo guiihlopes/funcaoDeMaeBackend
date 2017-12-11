@@ -26,6 +26,7 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "drsdre/yii2-wizardwidget": "*",
         "kartik-v/yii2-widget-rangeinput": "*",
+        "guiihlopes/azure-iot-hub": "dev-master",
         "kartik-v/yii2-widget-select2": "@dev"
     },
     "require-dev": {
@@ -68,6 +69,10 @@
         {
             "type": "composer",
             "url": "https://asset-packagist.org"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/guiihlopes/azure-iot-hub-php"
         }
     ]
 }

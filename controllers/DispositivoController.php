@@ -89,7 +89,7 @@ class DispositivoController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post())) {
-            $dispositivo = $this->findModel($model->idDispositivo);
+            $dispositivo = $this->findModel($model->idDispositivo, true);
             $dispositivo->idAdmin = Yii::$app->user->identity->idAdmin;
             $dispositivo->apelidoDispositivo = $model->apelidoDispositivo;
             $dispositivo->limiteEnergia = $model->limiteEnergia;
@@ -146,9 +146,9 @@ class DispositivoController extends Controller
      * @return Dispositivo the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($id, $bypassValidate = false)
     {
-        if (($model = Dispositivo::findOne($id)) !== null && $model->administrador->idAdmin === Yii::$app->user->identity->idAdmin) {
+        if (($model = Dispositivo::findOne($id)) !== null && ($bypassValidate || $model->administrador->idAdmin === Yii::$app->user->identity->idAdmin)) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
