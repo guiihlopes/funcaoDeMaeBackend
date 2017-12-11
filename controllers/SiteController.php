@@ -67,7 +67,10 @@ class SiteController extends Controller
         $dispositivo = new Dispositivo();
         $dispositivoIds = ArrayHelper::getColumn($dispositivo->administradorDispositivos, 'idDispositivo');
         $searchModel = new UsoSearch(['idDispositivo' => $dispositivoIds]);
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $queryParams = Yii::$app->request->queryParams;
+        $default = ['UsoSearch' => ['idDispositivo' => '']];
+        $defaultParams = count($queryParams) ? $queryParams : $default;
+        $dataProvider = $searchModel->search($defaultParams);
         $models = $dataProvider->getModels();
         $naoTemResultados = !count($models);
         $consumoMaximo = $naoTemResultados ? 0 : $dataProvider->query->max('consumoMedio');
