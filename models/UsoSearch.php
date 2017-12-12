@@ -52,6 +52,8 @@ class UsoSearch extends Uso
             'query' => $query,
         ]);
 
+        $this->load($params);
+
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
@@ -74,6 +76,8 @@ class UsoSearch extends Uso
         $query->andFilterWhere(['like', 'dtUso', $this->dtUso])
             ->andFilterWhere([
                 'uso.idDispositivo' => $this->idDispositivo,
+            ])
+            ->andFilterWhere([
                 'dispositivo.idDispositivo' => $this->idDispositivo,
             ]);
 

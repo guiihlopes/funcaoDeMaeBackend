@@ -26,8 +26,8 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "drsdre/yii2-wizardwidget": "*",
         "kartik-v/yii2-widget-rangeinput": "*",
-        "guiihlopes/azure-iot-hub": "dev-master",
-        "kartik-v/yii2-widget-select2": "@dev"
+        "kartik-v/yii2-widget-select2": "@dev",
+        "guzzlehttp/guzzle": "^6.3"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

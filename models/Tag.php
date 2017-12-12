@@ -5,7 +5,7 @@ namespace app\models;
 use Yii;
 
 use yii\helpers\ArrayHelper;
-use AzureIoTHub\DeviceClient;
+use GuzzleHttp\Client;
 
 /**
  * This is the model class for table "tag".
@@ -68,13 +68,18 @@ class Tag extends \yii\db\ActiveRecord
                 $host = 'FuncaoDeMae.azure-devices.net';
                 $dispositivo = $tagDispositivo->dispositivo;
                 $deviceId = $dispositivo->idHub;
-                $deviceKey = $value;
-                $client = new DeviceClient($host, $deviceId, $deviceKey);
-                $response = $client->sendEvent([
+                $message = [
                     'limiteEnergia' => $dispositivo->limiteEnergia,
                     'tagInserida' => $this->idTag,
                     'tagExcluida' => "",
-                ]);
+                ];
+                $connectionString = 'HostName=FuncaoDeMae.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=1cxMyEjEooVS63wrJOW9e/IPx7oq+2IQF2gN1nH/tWE=';
+                $data = [
+                    'connectionString' => $connectionString,
+                    'targetDevice' => $deviceId,
+                    'message' => $message,
+                ];
+                $this->sendMessage($data);
                 if($tagDispositivo->validate()){
                     $tagDispositivo->save();
                 }
@@ -86,17 +91,36 @@ class Tag extends \yii\db\ActiveRecord
                 $host = 'FuncaoDeMae.azure-devices.net';
                 $dispositivo = $value->dispositivo;
                 $deviceId = $dispositivo->idHub;
-                $deviceKey = $dispositivo->idDispositivo;
-                $client = new DeviceClient($host, $deviceId, $deviceKey);
-                $response = $client->sendEvent([
+                $message = [
                     'limiteEnergia' => $dispositivo->limiteEnergia,
                     'tagInserida' => "",
                     'tagExcluida' => $this->idTag,
-                ]);
+                ];
+                $connectionString = 'HostName=FuncaoDeMae.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=1cxMyEjEooVS63wrJOW9e/IPx7oq+2IQF2gN1nH/tWE=';
+                $data = [
+                    'connectionString' => $connectionString,
+                    'targetDevice' => $deviceId,
+                    'message' => $message,
+                ];
+                $this->sendMessage($data);
             }
         }
 
         return parent::beforeSave($insert);
+    }
+
+    private function sendMessage($data){
+        $host = 'localhost:8090';
+        $uri = '/api/tags';
+        $client = new Client([
+            'base_uri' => 'http://' . $host
+        ]);
+
+        $response = $client->request('POST', $uri, [
+            'form_params' => $data,
+        ]);
+
+        return $response;
     }
 
     public function isValidTag($attribute, $params)
