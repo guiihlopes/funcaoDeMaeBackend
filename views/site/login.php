@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <div class="m-t-40 card-box">
     <div class="text-center">
-        <h4 class="text-uppercase font-bold m-b-0">Sign In</h4>
+        <h4 class="text-uppercase font-bold m-b-0">Entrar</h4>
     </div>
     <div class="panel-body">
         <?php $form = ActiveForm::begin([
@@ -48,6 +48,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="row">
     <div class="col-sm-12 text-center">
-        <p class="text-muted">Don't have an account? <a href="<?= Url::toRoute('administrador/create') ?>" class="text-primary m-l-5"><b>Sign Up</b></a></p>
+        <p class="text-muted">Não tem uma conta? <a href="<?= Url::toRoute('administrador/create') ?>" class="text-primary m-l-5"><b>Cadastre-se</b></a></p>
     </div>
 </div>

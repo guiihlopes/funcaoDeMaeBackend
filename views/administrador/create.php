@@ -29,6 +29,6 @@ $this->params['breadcrumbs'][] = $this->title;
     
 <div class="row">
     <div class="col-sm-12 text-center">
-        <p class="text-muted">Already have account?<a href="<?= Url::toRoute('site/login') ?>" class="text-primary m-l-5"><b>Sign In</b></a></p>
+        <p class="text-muted">Já tem uma conta?<a href="<?= Url::toRoute('site/login') ?>" class="text-primary m-l-5"><b>Entre</b></a></p>
     </div>
 </div>
