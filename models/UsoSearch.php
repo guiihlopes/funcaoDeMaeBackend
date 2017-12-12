@@ -73,8 +73,10 @@ class UsoSearch extends Uso
             'consumoMedio' => $this->consumoMedio,
             'idTag' => $this->idTag,
         ]);
+
+        $dtUso = preg_replace("/(\d{2})?\/?(\d{2})?\/?(\d{4})?/", "$3$2$1", $this->dtUso);
         
-        $query->andFilterWhere(['like', 'dtUso', str_replace('/', "", $this->dtUso)])
+        $query->andFilterWhere(['like', 'dtUso', $dtUso])
             ->andFilterWhere([
                 'uso.idDispositivo' => $this->idDispositivo,
             ])
