@@ -24,10 +24,10 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
+                'only' => ['index', 'logout'],
                 'rules' => [
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['index', 'logout'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -60,10 +60,6 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        if (Yii::$app->user->isGuest) {
-            return $this->redirect(['login']);
-        }
-
         $dispositivo = new Dispositivo();
         $dispositivoIds = ArrayHelper::getColumn($dispositivo->administradorDispositivos, 'idDispositivo');
         $searchModel = new UsoSearch(['idDispositivo' => $dispositivoIds]);

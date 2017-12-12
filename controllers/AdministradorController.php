@@ -10,6 +10,7 @@ use yii\web\Response;
 use yii\widgets\ActiveForm;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * AdministradorController implements the CRUD actions for Administrador model.
@@ -22,6 +23,22 @@ class AdministradorController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'update', 'view', 'delete'],
+                'rules' => [
+                    [
+                        'actions' => ['index', 'update', 'view', 'delete'],
+                        'allow' => false,
+                        'roles' => ['*'],
+                    ],
+                    [
+                        'actions' => ['update'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -122,9 +139,9 @@ class AdministradorController extends Controller
      * @return Administrador the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($id, $bypassValidate = false)
     {
-        if (($model = Administrador::findOne($id)) !== null) {
+        if (($model = Administrador::findOne($id)) !== null && ($bypassValidate || $model->idAdmin === Yii::$app->user->identity->idAdmin)) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -31,9 +31,6 @@ class DispositivoController extends Controller
                         'actions' => ['index', 'update', 'create', 'view', 'delete'],
                         'allow' => true,
                         'roles' => ['@'],
-                        'matchCallback' => function ($rule, $action) {
-                            return (Yii::$app->user->identity !== null);
-                        }
                     ],
                 ],
             ],
