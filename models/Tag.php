@@ -59,27 +59,24 @@ class Tag extends \yii\db\ActiveRecord
         if($oldAttributes['limMaxTempoUso'] != $this->limMaxTempoUso){
             $this->limMaxTempoUso = $this->limMaxTempoUso*60;
         }
+        $oldTagDispositivos = $this->tagDispositivos;
+        $oldIdDispositivos = ArrayHelper::getColumn($oldTagDispositivos, 'idDispositivo');
+        $dispositivosIdRemovidos = array_diff($oldIdDispositivos, $this->dispositivos);
+        $dispositivosIdAdicionados = array_diff($this->dispositivos, $oldIdDispositivos);
+        foreach ($dispositivosIdAdicionados as $key => $value){
+            $dispositivo = Dispositivo::findOne($value);
+            $this->prepareAndSendMessage($dispositivo->idHub, $dispositivo->limiteEnergia, $this->idTag);
+        }
+        foreach ($dispositivosIdRemovidos as $key => $value){
+            $dispositivo = Dispositivo::findOne($value);
+            $this->prepareAndSendMessage($dispositivo->idHub, $dispositivo->limiteEnergia, "", $this->idTag);
+        }
         if(count($this->dispositivos)){
             TagDispositivo::deleteAll(['idTag' => $this->idTag]);
             foreach($this->dispositivos as $key => $value){
                 $tagDispositivo = new TagDispositivo();
                 $tagDispositivo->idDispositivo = $value;
                 $tagDispositivo->idTag = $this->idTag;
-                $host = 'FuncaoDeMae.azure-devices.net';
-                $dispositivo = $tagDispositivo->dispositivo;
-                $deviceId = $dispositivo->idHub;
-                $message = [
-                    'limiteEnergia' => $dispositivo->limiteEnergia,
-                    'tagInserida' => $this->idTag,
-                    'tagExcluida' => "",
-                ];
-                $connectionString = 'HostName=FuncaoDeMae.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=1cxMyEjEooVS63wrJOW9e/IPx7oq+2IQF2gN1nH/tWE=';
-                $data = [
-                    'connectionString' => $connectionString,
-                    'targetDevice' => $deviceId,
-                    'message' => $message,
-                ];
-                $this->sendMessage($data);
                 if($tagDispositivo->validate()){
                     $tagDispositivo->save();
                 }
@@ -107,6 +104,21 @@ class Tag extends \yii\db\ActiveRecord
         }
 
         return parent::beforeSave($insert);
+    }
+
+    public function prepareAndSendMessage($deviceId, $limiteEnergia = "", $tagInserida = "", $tagExcluida = ""){
+        $message = [
+            'limiteEnergia' => $limiteEnergia,
+            'tagInserida' => $tagInserida,
+            'tagExcluida' => $tagExcluida,
+        ];
+        $connectionString = 'HostName=FuncaoDeMae.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=1cxMyEjEooVS63wrJOW9e/IPx7oq+2IQF2gN1nH/tWE=';
+        $data = [
+            'connectionString' => $connectionString,
+            'targetDevice' => $deviceId,
+            'message' => $message,
+        ];
+        $this->sendMessage($data);
     }
 
     private function sendMessage($data){
