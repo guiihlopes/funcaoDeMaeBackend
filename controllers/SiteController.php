@@ -75,7 +75,11 @@ class SiteController extends Controller
         $tempoUsoMaximo = $naoTemResultados ? 0 : $dataProvider->query->max('tempoUso');
         $tempoUsoTotalMedio = $naoTemResultados ? 0 : $dataProvider->query->sum('tempoUso')/count($models);
         $modelsByTag = ArrayHelper::map($models, 'idUso', function($data) {
+            
+            $dtUso = preg_replace('/ (?!.* )/', "0", $data['dtUso'], 1);
+            $date = \DateTime::createFromFormat('Ymd G:i:s', $dtUso);
             return [
+                'mesUso' => $date->format('m'),
                 'consumoMedio' => $data['consumoMedio'],
                 'tempoUso' => $data['tempoUso'],
             ];

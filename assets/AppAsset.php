@@ -42,6 +42,8 @@ class AppAsset extends AssetBundle
         "js/jquery.peity.min.js",
         "js/morris.min.js",
         "js/raphael-min.js",
+        "js/chart.js/chart.min.js",
+        "js/jquery.chartjs.init.js",
         "js/jquery.dashboard.js",
         "js/jquery.core.js",
         "js/jquery.app.js",

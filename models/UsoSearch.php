@@ -50,6 +50,7 @@ class UsoSearch extends Uso
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => false
         ]);
 
         $this->load($params);
@@ -72,8 +73,8 @@ class UsoSearch extends Uso
             'consumoMedio' => $this->consumoMedio,
             'idTag' => $this->idTag,
         ]);
-
-        $query->andFilterWhere(['like', 'dtUso', $this->dtUso])
+        
+        $query->andFilterWhere(['like', 'dtUso', str_replace('/', "", $this->dtUso)])
             ->andFilterWhere([
                 'uso.idDispositivo' => $this->idDispositivo,
             ])
