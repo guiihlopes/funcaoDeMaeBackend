@@ -61,6 +61,7 @@ function random_color() {
 <!-- end row -->
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
+    'filterModel' => $searchModel,
     'columns' => [
         [
             'attribute' => 'tempoUso',
