@@ -122,7 +122,7 @@ class Tag extends \yii\db\ActiveRecord
     }
 
     private function sendMessage($data){
-        $host = 'localhost:8090';
+        $host = 'https://cloud-to-device.herokuapp.com';
         $uri = '/api/tags';
         $client = new Client([
             'base_uri' => 'http://' . $host
