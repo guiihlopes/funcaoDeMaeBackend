@@ -1,1 +1,1 @@
-web: vendor/bin/heroku-php-apache2 yii serve
+web: vendor/bin/heroku-php-nginx -C nginx.conf web/
