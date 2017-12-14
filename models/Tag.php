@@ -61,8 +61,12 @@ class Tag extends \yii\db\ActiveRecord
         }
         $oldTagDispositivos = $this->tagDispositivos;
         $oldIdDispositivos = ArrayHelper::getColumn($oldTagDispositivos, 'idDispositivo');
-        $dispositivosIdRemovidos = array_diff($oldIdDispositivos, $this->dispositivos);
-        $dispositivosIdAdicionados = array_diff($this->dispositivos, $oldIdDispositivos);
+        $idDispositivos = [];
+        if($this->dispositivos !== null){
+            $idDispositivos = array_merge($idDispositivos, $this->dispositivos);
+        }
+        $dispositivosIdRemovidos = array_diff($oldIdDispositivos, $idDispositivos);
+        $dispositivosIdAdicionados = array_diff($idDispositivos, $oldIdDispositivos);
         foreach ($dispositivosIdAdicionados as $key => $value){
             $dispositivo = Dispositivo::findOne($value);
             $this->prepareAndSendMessage($dispositivo->idHub, $dispositivo->limiteEnergia, $this->idTag);
