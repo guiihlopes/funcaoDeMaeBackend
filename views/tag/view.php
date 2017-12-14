@@ -28,12 +28,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'idIndexTag',
             'idTag',
             'apelidoTag',
-            'limMaxTempoUso',
+            [
+                'attribute' => 'limMaxTempoUso',
+                'value' => function ($data){
+                    return number_format($data['limMaxTempoUso']/60, 0) . ' min';
+                }
+            ],
             'qtdeUsoDia',
-            'idAdmin',
         ],
     ]) ?>
 
