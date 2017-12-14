@@ -138,6 +138,7 @@ class TagController extends Controller
         $tag = $this->findModel($id);
         $tag->scenario = 'delete';
         $tag->idAdmin = '';
+        $tag->dispositivos = null;
         $tag->save();
         return $this->redirect(['index']);
     }

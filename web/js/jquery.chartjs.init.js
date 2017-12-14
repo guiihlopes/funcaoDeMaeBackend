@@ -99,7 +99,7 @@ File: Chartjs
                             ticks: {
                                 max: max,
                                 min: max === min ? 0 : min,
-                                stepSize: (max / min) == 1 ? max : (max / min)
+                                stepSize: (max / min) == 1 ? max : min / max
                             }
                         }],
                         xAxes: [{

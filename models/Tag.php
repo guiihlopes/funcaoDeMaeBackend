@@ -88,23 +88,7 @@ class Tag extends \yii\db\ActiveRecord
         }
         // delete
         if($this->idAdmin == ''){
-            foreach($this->tagDispositivos as $key => $value){
-                $host = 'FuncaoDeMae.azure-devices.net';
-                $dispositivo = $value->dispositivo;
-                $deviceId = $dispositivo->idHub;
-                $message = [
-                    'limiteEnergia' => $dispositivo->limiteEnergia,
-                    'tagInserida' => "",
-                    'tagExcluida' => $this->idTag,
-                ];
-                $connectionString = 'HostName=FuncaoDeMae.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=1cxMyEjEooVS63wrJOW9e/IPx7oq+2IQF2gN1nH/tWE=';
-                $data = [
-                    'connectionString' => $connectionString,
-                    'targetDevice' => $deviceId,
-                    'message' => $message,
-                ];
-                $this->sendMessage($data);
-            }
+            TagDispositivo::deleteAll(['idTag' => $this->idTag]);
         }
 
         return parent::beforeSave($insert);

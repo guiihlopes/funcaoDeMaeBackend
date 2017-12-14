@@ -26,7 +26,8 @@ $gridColumns = [
             if($second < 10){
                 $second = '0' . $second;
             }
-            $dtUso = $year . $month . $day . ' ' . $hour . ':' . $min . ':' . $second;
+            // $dtUso = $year . $month . $day . ' ' . $hour . ':' . $min . ':' . $second;
+            $dtUso = $day . '/' . $month . '/' . $year .  ' ' . $hour . ':' . $min . ':' . $second;
             $date = \DateTime::createFromFormat('Ymd G:i:s', $dtUso);
             // var_dump($date->format('d/m/Y G:i:s'));
             // die();
