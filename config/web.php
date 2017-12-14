@@ -61,6 +61,12 @@ $config = [
             ],
         ],
     ],
+    'modules' => [
+        'gridview' => [
+            'class' => 'kartik\grid\Module',
+            'downloadAction' => '/gridview/export/download' // your grid export download setting
+        ]
+    ],
     'params' => $params,
 ];
 

@@ -115,7 +115,7 @@ hr {
 }
 #wrapper {
   height: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
   width: 100%;
 }
 .page {
@@ -489,7 +489,7 @@ hr {
   border: 1px solid #EBEFF2;
 }
 /* Dropdown */
-.dropdown-menu {
+/* .dropdown-menu {
   padding: 4px 0;
   transition: all 300ms ease;
   -moz-transition: all 300ms ease;
@@ -515,7 +515,7 @@ hr {
 .dropdown-menu > .active > a:focus {
   background-color: rgba(152, 166, 173, 0.1);
   color: #435966;
-}
+} */
 blockquote .small,
 blockquote footer,
 blockquote small {
@@ -1005,6 +1005,7 @@ button.list-group-item .list-group-item-heading {
   margin: 0;
   padding: 0;
   border-bottom: 2px solid rgba(238, 238, 238, 0.3);
+  background: inherit;
   padding-bottom: 15px;
 }
 .modal .modal-dialog .modal-content .modal-body {

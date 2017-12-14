@@ -1,10 +1,38 @@
 <?php
 
 /* @var $this yii\web\View */
-use yii\grid\GridView;
+use kartik\grid\GridView;
+use kartik\export\ExportMenu;
 use yii\helpers\ArrayHelper;
 
 $this->title = 'Dashboard';
+
+$gridColumns = [
+    [
+        'attribute' => 'tempoUso',
+        'value' => function ($data) {
+            return (number_format($data['tempoUso']/60, 0)).' minutos';
+        }
+    ],
+    [
+        'attribute' => 'dtUso',
+        'value' => function($data){
+            $dtUso = preg_replace('/ (?!.* )/', "0", $data['dtUso'], 1);
+            $date = \DateTime::createFromFormat('Ymd G:i:s', $dtUso);
+            return $date->format('d/m/Y G:i:s');
+        }
+    ],
+    [
+        'attribute' => 'consumoMedio',
+        'format' => 'raw',
+        'value' => function ($data){
+            
+            return $data['consumoMedio'].'w';
+        }
+    ],
+    'tag.apelidoTag',
+    // 'idDispositivo',
+];
 
 function random_color_part() {
     return str_pad( dechex( mt_rand( 0, 255 ) ), 2, '0', STR_PAD_LEFT);
@@ -78,33 +106,20 @@ function random_color() {
     ?>
 </div>
 <!-- end row -->
+<?= ExportMenu::widget([
+    'columnBatchToggleSettings' => [
+        'options' => [
+            'class'=> 'checkbox-primary',
+        ]
+    ],
+    'filename' => 'Uso',
+    'showConfirmAlert' => false,
+    'dataProvider' => $dataProvider,
+    'columns' => $gridColumns
+]); ?>
+<hr>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
-    'columns' => [
-        [
-            'attribute' => 'tempoUso',
-            'value' => function ($data) {
-                return (number_format($data['tempoUso']/60, 0)).' minutos';
-            }
-        ],
-        [
-            'attribute' => 'dtUso',
-            'value' => function($data){
-                $dtUso = preg_replace('/ (?!.* )/', "0", $data['dtUso'], 1);
-                $date = \DateTime::createFromFormat('Ymd G:i:s', $dtUso);
-                return $date->format('d/m/Y G:i:s');
-            }
-        ],
-        [
-            'attribute' => 'consumoMedio',
-            'format' => 'raw',
-            'value' => function ($data){
-                
-                return $data['consumoMedio'].'w';
-            }
-        ],
-        'tag.apelidoTag',
-        // 'idDispositivo',
-    ],
+    'columns' => $gridColumns,
 ]); ?>

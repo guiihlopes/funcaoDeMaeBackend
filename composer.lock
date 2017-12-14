@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4aa70fd67defc69019d74582fa31ebf1",
+    "content-hash": "5c2614dedd50fd107a48ae486b81f9cb",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -22,6 +22,29 @@
             },
             "require": {
                 "bower-asset/jquery": ">=1.9.1,<4.0"
+            },
+            "type": "bower-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "bower-asset/bootstrap3-dialog",
+            "version": "v1.35.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nakupanda/bootstrap3-dialog.git",
+                "reference": "3dd11d586f78de75356af418907ec6e3b347377c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nakupanda/bootstrap3-dialog/zipball/3dd11d586f78de75356af418907ec6e3b347377c",
+                "reference": "3dd11d586f78de75356af418907ec6e3b347377c",
+                "shasum": null
+            },
+            "require": {
+                "bower-asset/bootstrap": ">=3.1.0",
+                "bower-asset/jquery": ">=1.9.0"
             },
             "type": "bower-asset",
             "license": [
@@ -500,6 +523,232 @@
             "time": "2017-03-20T17:10:46+00:00"
         },
         {
+            "name": "kartik-v/yii2-dialog",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-dialog.git",
+                "reference": "ae6de7328251b084de7f1a66bac1f7c6279c9ad1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-dialog/zipball/ae6de7328251b084de7f1a66bac1f7c6279c9ad1",
+                "reference": "ae6de7328251b084de7f1a66bac1f7c6279c9ad1",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/bootstrap3-dialog": "~1.34",
+                "kartik-v/yii2-krajee-base": "~1.7"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "kartik\\dialog\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "An asset bundle for bootstrap3-dialog for Yii 2.0 framework.",
+            "homepage": "https://github.com/kartik-v/yii2-dialog",
+            "keywords": [
+                "alert",
+                "bootstrap",
+                "dialog",
+                "extension",
+                "modal",
+                "yii2"
+            ],
+            "time": "2017-11-06T16:04:54+00:00"
+        },
+        {
+            "name": "kartik-v/yii2-dynagrid",
+            "version": "v1.4.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-dynagrid.git",
+                "reference": "1e12d8bf411b314018512e067fafd449f683ce38"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-dynagrid/zipball/1e12d8bf411b314018512e067fafd449f683ce38",
+                "reference": "1e12d8bf411b314018512e067fafd449f683ce38",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/yii2-grid": "~3.1",
+                "kartik-v/yii2-sortable": "~1.2",
+                "kartik-v/yii2-widget-activeform": "~1.4",
+                "kartik-v/yii2-widget-select2": "~2.0"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "kartik\\dynagrid\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "Turbo charge the Yii 2 GridView with personalized columns, page size, and themes.",
+            "homepage": "https://github.com/kartik-v/yii2-dynagrid",
+            "keywords": [
+                "columns",
+                "dynamic",
+                "extension",
+                "grid",
+                "hide",
+                "order",
+                "reorder",
+                "show",
+                "sort",
+                "visibility",
+                "widget",
+                "yii2"
+            ],
+            "time": "2017-10-23T14:02:31+00:00"
+        },
+        {
+            "name": "kartik-v/yii2-export",
+            "version": "v1.2.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-export.git",
+                "reference": "42fd901373f03dd983481b8fb2ce537e6fa0577e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-export/zipball/42fd901373f03dd983481b8fb2ce537e6fa0577e",
+                "reference": "42fd901373f03dd983481b8fb2ce537e6fa0577e",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/yii2-dialog": "~1.0",
+                "kartik-v/yii2-dynagrid": ">=1.4.5",
+                "kartik-v/yii2-mpdf": "~1.0",
+                "phpoffice/phpexcel": "~1.8"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "kartik\\export\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "A library to export server/db data in various formats (e.g. excel, html, pdf, csv etc.)",
+            "homepage": "https://github.com/kartik-v/yii2-export",
+            "keywords": [
+                "OpenXML",
+                "csv",
+                "export",
+                "extension",
+                "html",
+                "json",
+                "pdf",
+                "spreadsheet",
+                "text",
+                "widget",
+                "xls",
+                "xlsx",
+                "yii2"
+            ],
+            "time": "2017-11-19T18:30:55+00:00"
+        },
+        {
+            "name": "kartik-v/yii2-grid",
+            "version": "v3.1.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-grid.git",
+                "reference": "77e9286993ae4e570e7576578043e31ab08b9ee3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-grid/zipball/77e9286993ae4e570e7576578043e31ab08b9ee3",
+                "reference": "77e9286993ae4e570e7576578043e31ab08b9ee3",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/yii2-dialog": "~1.0",
+                "kartik-v/yii2-krajee-base": "~1.7"
+            },
+            "suggest": {
+                "kartik-v/yii2-mpdf": "For exporting grids to PDF"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "kartik\\grid\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "Yii 2 GridView on steroids. Various enhancements and utilities for the Yii 2.0 GridView widget.",
+            "homepage": "https://github.com/kartik-v/yii2-grid",
+            "keywords": [
+                "extension",
+                "grid",
+                "widget",
+                "yii2"
+            ],
+            "time": "2017-11-23T15:43:16+00:00"
+        },
+        {
             "name": "kartik-v/yii2-krajee-base",
             "version": "v1.8.9",
             "source": {
@@ -549,6 +798,157 @@
                 "yii2"
             ],
             "time": "2017-09-29T06:18:14+00:00"
+        },
+        {
+            "name": "kartik-v/yii2-mpdf",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-mpdf.git",
+                "reference": "17fda1cb084c58fee6014026d35af5faf73316ef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-mpdf/zipball/17fda1cb084c58fee6014026d35af5faf73316ef",
+                "reference": "17fda1cb084c58fee6014026d35af5faf73316ef",
+                "shasum": ""
+            },
+            "require": {
+                "mpdf/mpdf": "<7.0"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "kartik\\mpdf\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD 3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "A Yii2 wrapper component for the mPDF library which generates PDF files from UTF-8 encoded HTML.",
+            "homepage": "https://github.com/kartik-v/yii2-mpdf",
+            "keywords": [
+                "component",
+                "extension",
+                "html",
+                "mpdf",
+                "pdf",
+                "utf8",
+                "yii2"
+            ],
+            "time": "2017-01-14T11:51:12+00:00"
+        },
+        {
+            "name": "kartik-v/yii2-sortable",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-sortable.git",
+                "reference": "650dfd6876115fbb996eb6eb8f1d5d13ddb69285"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-sortable/zipball/650dfd6876115fbb996eb6eb8f1d5d13ddb69285",
+                "reference": "650dfd6876115fbb996eb6eb8f1d5d13ddb69285",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/yii2-krajee-base": "~1.7"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "kartik\\sortable\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "Create sortable lists and grids using HTML5 drag and drop API for Yii 2.0.",
+            "homepage": "https://github.com/kartik-v/yii2-sortable",
+            "keywords": [
+                "bootstrap",
+                "extension",
+                "jquery",
+                "range",
+                "sortable",
+                "widget",
+                "yii2"
+            ],
+            "time": "2015-06-17T17:34:48+00:00"
+        },
+        {
+            "name": "kartik-v/yii2-widget-activeform",
+            "version": "v1.4.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-widget-activeform.git",
+                "reference": "53c2f877f12ba0b79e8346b6cae50cbba2bcfc69"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-activeform/zipball/53c2f877f12ba0b79e8346b6cae50cbba2bcfc69",
+                "reference": "53c2f877f12ba0b79e8346b6cae50cbba2bcfc69",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/yii2-krajee-base": "~1.7"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "kartik\\form\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "Enhanced Yii2 active-form and active-field with full bootstrap styling support (sub repo split from yii2-widgets).",
+            "homepage": "https://github.com/kartik-v/yii2-widget-activeform",
+            "keywords": [
+                "activefield",
+                "activeform",
+                "extension",
+                "field",
+                "form",
+                "widget",
+                "yii2"
+            ],
+            "time": "2016-04-27T18:38:05+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-rangeinput",
@@ -653,6 +1053,114 @@
             "time": "2017-11-25T06:02:18+00:00"
         },
         {
+            "name": "mpdf/mpdf",
+            "version": "v6.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mpdf/mpdf.git",
+                "reference": "e7310ce53b5c11db1f0b781fe0a69066608ac6e2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mpdf/mpdf/zipball/e7310ce53b5c11db1f0b781fe0a69066608ac6e2",
+                "reference": "e7310ce53b5c11db1f0b781fe0a69066608ac6e2",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": "^5.4.0 || 7.0.*",
+                "setasign/fpdi": "1.6.*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.7"
+            },
+            "suggest": {
+                "ext-zlib": "Needed for compression of embedded resources, such as fonts"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "mpdf.php",
+                    "classes"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Ian Back",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A PHP class to generate PDF files from HTML with Unicode/UTF-8 and CJK support",
+            "homepage": "http://mpdf.github.io",
+            "keywords": [
+                "pdf",
+                "php",
+                "utf-8"
+            ],
+            "time": "2017-07-09T16:46:12+00:00"
+        },
+        {
+            "name": "phpoffice/phpexcel",
+            "version": "1.8.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHPOffice/PHPExcel.git",
+                "reference": "372c7cbb695a6f6f1e62649381aeaa37e7e70b32"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHPOffice/PHPExcel/zipball/372c7cbb695a6f6f1e62649381aeaa37e7e70b32",
+                "reference": "372c7cbb695a6f6f1e62649381aeaa37e7e70b32",
+                "shasum": ""
+            },
+            "require": {
+                "ext-xml": "*",
+                "ext-xmlwriter": "*",
+                "php": ">=5.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PHPExcel": "Classes/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL"
+            ],
+            "authors": [
+                {
+                    "name": "Maarten Balliauw",
+                    "homepage": "http://blog.maartenballiauw.be"
+                },
+                {
+                    "name": "Mark Baker"
+                },
+                {
+                    "name": "Franck Lefevre",
+                    "homepage": "http://blog.rootslabs.net"
+                },
+                {
+                    "name": "Erik Tilt"
+                }
+            ],
+            "description": "PHPExcel - OpenXML - Read, Create and Write Spreadsheet documents in PHP - Spreadsheet engine",
+            "homepage": "http://phpexcel.codeplex.com",
+            "keywords": [
+                "OpenXML",
+                "excel",
+                "php",
+                "spreadsheet",
+                "xls",
+                "xlsx"
+            ],
+            "time": "2015-05-01T07:00:55+00:00"
+        },
+        {
             "name": "psr/http-message",
             "version": "1.0.1",
             "source": {
@@ -701,6 +1209,55 @@
                 "response"
             ],
             "time": "2016-08-06T14:39:51+00:00"
+        },
+        {
+            "name": "setasign/fpdi",
+            "version": "1.6.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Setasign/FPDI.git",
+                "reference": "a6ad58897a6d97cc2d2cd2adaeda343b25a368ea"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Setasign/FPDI/zipball/a6ad58897a6d97cc2d2cd2adaeda343b25a368ea",
+                "reference": "a6ad58897a6d97cc2d2cd2adaeda343b25a368ea",
+                "shasum": ""
+            },
+            "suggest": {
+                "setasign/fpdf": "FPDI will extend this class but as it is also possible to use \"tecnickcom/tcpdf\" as an alternative there's no fixed dependency configured.",
+                "setasign/fpdi-fpdf": "Use this package to automatically evaluate dependencies to FPDF.",
+                "setasign/fpdi-tcpdf": "Use this package to automatically evaluate dependencies to TCPDF."
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "filters/",
+                    "fpdi.php",
+                    "fpdf_tpl.php",
+                    "fpdi_pdf_parser.php",
+                    "pdf_context.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jan Slabon",
+                    "email": "jan.slabon@setasign.com",
+                    "homepage": "https://www.setasign.com"
+                }
+            ],
+            "description": "FPDI is a collection of PHP classes facilitating developers to read pages from existing PDF documents and use them as templates in FPDF. Because it is also possible to use FPDI with TCPDF, there are no fixed dependencies defined. Please see suggestions for packages which evaluates the dependencies automatically.",
+            "homepage": "https://www.setasign.com/fpdi",
+            "keywords": [
+                "fpdf",
+                "fpdi",
+                "pdf"
+            ],
+            "time": "2017-05-11T14:25:49+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3515,7 +4072,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "kartik-v/yii2-widget-select2": 20
+        "kartik-v/yii2-widget-select2": 20,
+        "kartik-v/yii2-export": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
