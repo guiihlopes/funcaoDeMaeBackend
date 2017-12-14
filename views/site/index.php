@@ -17,9 +17,20 @@ $gridColumns = [
     [
         'attribute' => 'dtUso',
         'value' => function($data){
-            $dtUso = preg_replace('/ (?!.* )/', "0", $data['dtUso'], 1);
+            $year = substr($data['dtUso'], 0, 4);
+            $month = substr($data['dtUso'], 4, 2);
+            $day = substr($data['dtUso'], 6, 2);
+            $hour = substr($data['dtUso'], 9, 2);
+            $min = substr($data['dtUso'], 12, 2);
+            $second = substr($data['dtUso'], 15, 2);
+            if($second < 10){
+                $second = '0' . $second;
+            }
+            $dtUso = $year . $month . $day . ' ' . $hour . ':' . $min . ':' . $second;
             $date = \DateTime::createFromFormat('Ymd G:i:s', $dtUso);
-            return $date->format('d/m/Y G:i:s');
+            // var_dump($date->format('d/m/Y G:i:s'));
+            // die();
+            return $dtUso;
         }
     ],
     [
