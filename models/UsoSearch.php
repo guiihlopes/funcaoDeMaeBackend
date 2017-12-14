@@ -81,6 +81,9 @@ class UsoSearch extends Uso
                 'uso.idDispositivo' => $this->idDispositivo,
             ])
             ->andFilterWhere([
+                'dispositivo.idAdmin' => Yii::$app->user->identity->idAdmin,
+            ])
+            ->andFilterWhere([
                 'dispositivo.idDispositivo' => $this->idDispositivo,
             ]);
 
