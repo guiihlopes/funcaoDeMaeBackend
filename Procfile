@@ -1,1 +1,1 @@
-web: php yii serve
+web: vendor/bin/heroku-php-apache2 web/

@@ -60,7 +60,7 @@ use yii\widgets\MaskedInput;
 
     <?= $form->field($model, 'telefone')->textInput()->
     widget(MaskedInput::className(), [
-        'mask' => '9999-9999{1,2}'
+        'mask' => '9999{1,2}-9999'
     ]) ?>
 
     <?php 
