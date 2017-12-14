@@ -21,6 +21,7 @@
     "prefer-stable": true,
     "require": {
         "php": ">=5.4.0",
+        "fxp/composer-asset-plugin": "^1.4",
         "yiisoft/yii2": "~2.0.5",
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
@@ -69,10 +70,6 @@
         {
             "type": "composer",
             "url": "https://asset-packagist.org"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/guiihlopes/azure-iot-hub-php"
         }
     ]
 }
