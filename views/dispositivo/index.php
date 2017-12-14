@@ -28,11 +28,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'buttons' => [
-                    'view' => function($url, $mode){
-                        return '';
-                    }
-                ]
             ],
         ],
     ]); ?>
