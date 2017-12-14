@@ -1,1 +1,1 @@
-web: vendor/bin/heroku-php-apache2 -l runtime/logs/app.log yii serve
+web: vendor/bin/heroku-php-apache2 -l runtime/logs/app.log -C apache_app.conf web/
