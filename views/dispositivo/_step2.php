@@ -2,7 +2,7 @@
   use kartik\range\RangeInput;
 ?>
 
-<?= $form->field($model, 'apelidoDispositivo')->textInput(['placeholder' => 'Chuveiro da sala']) ?>
+<?= $form->field($model, 'apelidoDispositivo')->textInput(['placeholder' => 'Chuveiro do Luiz']) ?>
 
 <?= $form->field($model, 'limiteEnergia')->widget(RangeInput::classname(), [
     'options' => ['placeholder' => 'Limite de energia - 0 -> 100', 'value' => 50],

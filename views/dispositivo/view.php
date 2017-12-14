@@ -15,8 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->idDispositivo], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->idDispositivo], [
+        <?= Html::a('Atualizar', ['update', 'id' => $model->idDispositivo], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Deletar', ['delete', 'id' => $model->idDispositivo], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'apelidoDispositivo',
             'nivelBattDispositivo',
             'limiteEnergia',
-            'idAdmin',
+            // 'idAdmin',
         ],
     ]) ?>
 
